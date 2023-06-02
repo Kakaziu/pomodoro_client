@@ -18,26 +18,13 @@ export const HeaderTag = styled.header`
 `;
 
 export const Container = styled.div`
-  margin: auto;
   width: 90%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  h2 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    span {
-      margin-bottom: 3px;
-      margin-left: 10px;
-    }
-  }
+  margin: auto;
 
   div {
     display: flex;
     align-items: flex-end;
+    justify-content: right;
 
     span {
       margin-right: 15px;
