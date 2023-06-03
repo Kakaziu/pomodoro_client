@@ -49,10 +49,16 @@ export const Container = styled.div`
   li {
     margin-top: 10px;
     display: flex;
+    transition: 0.3s;
 
     span {
       margin-top: 0.5px;
       margin-right: 10px;
+    }
+
+    &:hover {
+      color: #ccc;
+      cursor: pointer;
     }
   }
 `;
