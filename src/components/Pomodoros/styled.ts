@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const PomodorosTag = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 30px;
   overflow-y: scroll;
   height: 72.5vh;
@@ -24,11 +23,26 @@ export const Pomodoro = styled.div`
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0.5);
-  width: 420px;
+  width: 460px;
+  height: 220px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
   h3 {
     font-size: 23px;
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    margin: auto;
+
+    div {
+      width: 60px;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   span {
@@ -42,8 +56,14 @@ export const Pomodoro = styled.div`
 export const PomodoroInfos = styled.div`
   margin-top: 30px;
   display: flex;
+  justify-content: center;
 
   div {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     .tp {
       color: red;
     }
@@ -62,6 +82,7 @@ export const PomodoroInfos = styled.div`
   }
 
   span {
+    width: 70%;
     font-size: 15px;
     margin-top: 5px;
   }

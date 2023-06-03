@@ -57,7 +57,7 @@ export const Container = styled.div`
     }
 
     &:hover {
-      color: #ccc;
+      color: #545454;
       cursor: pointer;
     }
   }
