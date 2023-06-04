@@ -9,7 +9,7 @@ const Header: FunctionComponent = () => {
     <HeaderTag>
       <Container>
         <div>
-          <span>Olá, Kauã Borba</span>
+          <span>Hello, Kauã Borba</span>
           <FaUserCircle
             size="30"
             cursor="pointer"

@@ -8,7 +8,7 @@ const HomeInfos: FunctionComponent = () => {
       <TitlePag>
         <div>
           <h1>UPOMODORO</h1>
-          <p>Crie pomodoros personalizados para diferentes tarefas.</p>
+          <p>Create custom pomodoros for different tasks</p>
         </div>
       </TitlePag>
 

@@ -19,7 +19,7 @@ const SideBarr: FunctionComponent = () => {
         </h2>
 
         <div>
-          <h3>Navegação</h3>
+          <h3>Navigation</h3>
           <ul>
             <li>
               <span>
@@ -31,7 +31,7 @@ const SideBarr: FunctionComponent = () => {
               <span>
                 <MdTimeline size="22" />
               </span>
-              Histórico
+              Historic
             </li>
           </ul>
         </div>
