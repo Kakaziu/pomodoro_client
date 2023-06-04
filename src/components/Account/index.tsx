@@ -30,6 +30,30 @@ const Account: FunctionComponent<IAccount> = ({ type }) => {
           {type === "REGISTER" ? "SIGN IN" : "SIGN UP"}
         </Button>
       </InfoAccount>
+      <Form
+        type={type}
+        camps={[
+          {
+            type: "Firstname",
+            inputType: "text",
+          },
+
+          {
+            type: "Lastname",
+            inputType: "text",
+          },
+
+          {
+            type: "E-mail",
+            inputType: "email",
+          },
+
+          {
+            type: "Password",
+            inputType: "password",
+          },
+        ]}
+      />
     </AccountTag>
   );
 };

@@ -1,40 +1,23 @@
 import { FunctionComponent } from "react";
+import { Button } from "../Button/styled";
 import { FormTag, Camp } from "./styled";
-import { RiUserFill, RiUser2Fill } from "react-icons/ri";
-import { AiFillMail, AiFillLock } from "react-icons/ai";
 import { IForm } from "./protocol";
+import IconType from "../IconType";
 
-const Form: FunctionComponent<IForm> = ({ type }) => {
+const Form: FunctionComponent<IForm> = ({ type, camps }) => {
   return (
     <FormTag>
       <h1>{type === "REGISTER" ? "SIGN UP" : "SIGN IN"}</h1>
-      <Camp>
-        <span>
-          <RiUserFill size="22" color="#121331" />
-        </span>
-        <input type="text" placeholder="Firstname" />
-      </Camp>
-
-      <Camp>
-        <span>
-          <RiUser2Fill size="22" color="#121331" />
-        </span>
-        <input type="text" placeholder="Lastname" />
-      </Camp>
-
-      <Camp>
-        <span>
-          <AiFillMail size="22" color="#121331" />
-        </span>
-        <input type="email" placeholder="E-mail" />
-      </Camp>
-
-      <Camp>
-        <span>
-          <AiFillLock size="22" color="#121331" />
-        </span>
-        <input type="password" placeholder="Password" />
-      </Camp>
+      {camps.map((camp) => {
+        return (
+          <Camp>
+            <span>
+              <IconType type={camp.type} />
+            </span>
+            <input type={camp.inputType} placeholder={camp.type} />
+          </Camp>
+        );
+      })}
 
       <Button
         width="35%"
