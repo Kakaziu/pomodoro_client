@@ -13,7 +13,7 @@ const Register = () => {
         backgroundColor: "#ccc",
       }}
     >
-      <Account />
+      <Account type="REGISTER" />
     </section>
   );
 };
