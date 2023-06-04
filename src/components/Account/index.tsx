@@ -1,35 +1,13 @@
 import { FunctionComponent } from "react";
-import { Button } from "../Button/styled";
-import { AccountTag, InfoAccount } from "./styled";
+import { AccountTag } from "./styled";
 import { IAccount } from "./protocol";
 import Form from "../Form";
+import InfoAccount from "../InfoAccount";
 
 const Account: FunctionComponent<IAccount> = ({ type }) => {
   return (
     <AccountTag>
-      <InfoAccount>
-        <h2>Welcome to UPomodoro</h2>
-        <p>
-          {type === "REGISTER"
-            ? "To keep conected with us Please login in your personal account"
-            : "If you not have an account, create one"}
-        </p>
-        <Button
-          width="50%"
-          border={{
-            haveBorder: true,
-            size: "2px",
-            type: "solid",
-            color: "white",
-          }}
-          backgroundColor="transparent"
-          color="white"
-          hoverBackgroundColor="white"
-          hoverColor="#121331"
-        >
-          {type === "REGISTER" ? "SIGN IN" : "SIGN UP"}
-        </Button>
-      </InfoAccount>
+      <InfoAccount type={type} />
       <Form
         type={type}
         camps={[

@@ -1,3 +1,4 @@
+import { FunctionComponent } from "react";
 import { RiUserFill, RiUser2Fill } from "react-icons/ri";
 import { AiFillMail, AiFillLock } from "react-icons/ai";
 
