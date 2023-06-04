@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IButton, IUserMenu } from "./protocol";
 
 export const HeaderTag = styled.header`
   color: #121331;
@@ -30,5 +31,38 @@ export const Container = styled.div`
       margin-right: 15px;
       font-size: 17px;
     }
+  }
+`;
+
+export const UserMenu = styled.div<IUserMenu>`
+  position: absolute;
+  right: 80px;
+  top: 65px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  transition: 0.5s;
+  overflow: hidden;
+  height: ${(props) => props.height};
+  opacity: ${(props) => props.opacity};
+`;
+
+export const Button = styled.button<IButton>`
+  padding: 8px 20px;
+  font-size: 17px;
+  border: none;
+  border-radius: 4px;
+  background-color: ${(props) => props.background};
+  color: white;
+  margin: 10px 0px;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: ${(props) => props.hoverColor};
   }
 `;

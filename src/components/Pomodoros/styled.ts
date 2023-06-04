@@ -30,6 +30,7 @@ export const Pomodoro = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 
   h3 {
     font-size: 23px;
@@ -50,6 +51,10 @@ export const Pomodoro = styled.div`
     font-weight: bold;
     display: block;
     margin-top: 15px;
+  }
+
+  &:hover {
+    outline: 2px solid #121331;
   }
 `;
 
