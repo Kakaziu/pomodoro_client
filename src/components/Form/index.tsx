@@ -1,24 +1,71 @@
-import React, { FunctionComponent, useState } from "react";
+import { FormEvent, FunctionComponent, useState } from "react";
 import { Button } from "../Button/styled";
 import { FormTag, Camp } from "./styled";
-import { IForm } from "./protocol";
+import { IForm, Inputs, RegisterParams, StateCamps } from "./protocol";
 import IconType from "../IconType";
+import api from "../../services/api";
+import { toast } from "react-toastify";
 
 const Form: FunctionComponent<IForm> = ({ type, camps }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState<StateCamps>({
+    value: "",
+    error: "",
+  });
+  const [lastName, setLastName] = useState<StateCamps>({
+    value: "",
+    error: "",
+  });
+  const [email, setEmail] = useState<StateCamps>({ value: "", error: "" });
+  const [password, setPassword] = useState<StateCamps>({
+    value: "",
+    error: "",
+  });
 
-  function onChangeInput(type: string, e: React.ChangeEvent<HTMLInputElement>) {
-    if (type === "Firstname") setFirstName(e.target.value);
-    if (type === "Lastname") setLastName(e.target.value);
-    if (type === "E-mail") setEmail(e.target.value);
-    if (type === "Password") setPassword(e.target.value);
+  function findState(type: Inputs) {
+    if (type === "Firstname")
+      return { type: firstName, setFuncType: setFirstName };
+    if (type === "Lastname")
+      return { type: lastName, setFuncType: setLastName };
+    if (type === "E-mail") return { type: email, setFuncType: setEmail };
+    if (type === "Password")
+      return { type: password, setFuncType: setPassword };
+  }
+
+  async function handleSubmit(e: FormEvent): Promise<void> {
+    e.preventDefault();
+
+    validCamps(firstName.value, setFirstName, "Firstname");
+    validCamps(lastName.value, setLastName, "Lastname");
+    validCamps(email.value, setEmail, "E-mail");
+    validCamps(password.value, setPassword, "Password");
+
+    const data: RegisterParams = {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      password: password.value,
+    };
+
+    if (firstName.value && lastName.value && email.value && password.value) {
+      try {
+        const response = await api.post("/users", data);
+      } catch (e: any) {
+        toast.error(e.response.data.message);
+      }
+    }
+  }
+
+  function validCamps(
+    value: string,
+    setFunc: React.Dispatch<React.SetStateAction<StateCamps>>,
+    camp: Inputs
+  ) {
+    if (!value)
+      return setFunc({ value: "", error: `* O campo '${camp}' está vazio` });
   }
 
   return (
-    <FormTag>
+    <FormTag onSubmit={handleSubmit}>
       <h1>{type === "REGISTER" ? "SIGN UP" : "SIGN IN"}</h1>
       {camps.map((camp) => {
         return (
@@ -29,8 +76,15 @@ const Form: FunctionComponent<IForm> = ({ type, camps }) => {
             <input
               type={camp.inputType}
               placeholder={camp.type}
-              onChange={(e) => onChangeInput(camp.type, e)}
+              onChange={(e) =>
+                findState(camp.type)?.setFuncType({
+                  value: e.target.value,
+                  error: "",
+                })
+              }
+              value={findState(camp.type)?.type.value}
             />
+            <p>{findState(camp.type)?.type.error}</p>
           </Camp>
         );
       })}

@@ -27,6 +27,15 @@ export const Camp = styled.div`
     left: 90px;
   }
 
+  p {
+    margin: auto;
+    width: 65%;
+    font-size: 13px;
+    color: red;
+    margin-top: 5px;
+    text-align: left;
+  }
+
   input {
     padding: 10px 15px 10px 45px;
     width: 70%;
