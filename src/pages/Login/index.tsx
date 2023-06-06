@@ -2,10 +2,10 @@ import Form from "../../components/Form";
 import InfoAccount from "../../components/InfoAccount";
 import { AccountTag } from "../styled";
 
-const Register = () => {
+const Login = () => {
   return (
     <section
-      id="register"
+      id="login"
       style={{
         display: "flex",
         alignItems: "center",
@@ -16,20 +16,10 @@ const Register = () => {
       }}
     >
       <AccountTag>
-        <InfoAccount type="REGISTER" />
+        <InfoAccount type="LOGIN" />
         <Form
-          type="REGISTER"
+          type="LOGIN"
           camps={[
-            {
-              type: "Firstname",
-              inputType: "text",
-            },
-
-            {
-              type: "Lastname",
-              inputType: "text",
-            },
-
             {
               type: "E-mail",
               inputType: "email",
@@ -46,4 +36,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
