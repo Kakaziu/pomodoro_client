@@ -9,19 +9,6 @@ export const Aside = styled.aside`
   z-index: 9999;
   background-color: white;
 
-  h2 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-
-    span {
-      margin-bottom: 3px;
-      margin-right: 10px;
-    }
-  }
-
   ul {
     margin-top: 30px;
     list-style: none;

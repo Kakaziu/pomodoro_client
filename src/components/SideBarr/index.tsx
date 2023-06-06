@@ -2,22 +2,18 @@ import { FunctionComponent } from "react";
 import { Aside, Container } from "./styled";
 import { BiTimeFive } from "react-icons/bi";
 import { MdTimeline } from "react-icons/md";
+import { useSelector } from "react-redux";
+import Logo from "../Logo";
 
 const SideBarr: FunctionComponent = () => {
+  const { user } = useSelector((state: any) => state.UserReducer);
+
+  if (!user) return <></>;
+
   return (
     <Aside>
       <Container>
-        <h2>
-          <span>UPomodoro</span>
-          <lord-icon
-            src="https://cdn.lordicon.com/qmuwmmnl.json"
-            trigger="loop"
-            delay="2000"
-            colors="primary:#121331"
-            style={{ width: "35px", height: "35px" }}
-          ></lord-icon>
-        </h2>
-
+        <Logo />
         <div>
           <h3>Navigation</h3>
           <ul>

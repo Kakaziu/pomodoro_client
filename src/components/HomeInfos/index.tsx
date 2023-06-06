@@ -1,10 +1,13 @@
 import { FunctionComponent } from "react";
-import { HomeInfosTag, TitlePag } from "./styled";
+import { ContentNoUser, HomeInfosTag, TitlePag } from "./styled";
 import Pomodoros from "../Pomodoros";
+import { useSelector } from "react-redux";
 
 const HomeInfos: FunctionComponent = () => {
+  const { user } = useSelector((state: any) => state.UserReducer);
+
   return (
-    <HomeInfosTag>
+    <HomeInfosTag user={user}>
       <TitlePag>
         <div>
           <h1>UPOMODORO</h1>
@@ -12,7 +15,19 @@ const HomeInfos: FunctionComponent = () => {
         </div>
       </TitlePag>
 
-      <Pomodoros />
+      {user ? (
+        <Pomodoros />
+      ) : (
+        <ContentNoUser>
+          <lord-icon
+            src="https://cdn.lordicon.com/mgmiqlge.json"
+            trigger="loop"
+            delay="2500"
+            colors="primary:#3a3347,secondary:#f24c00,tertiary:#4bb3fd,quaternary:#ebe6ef"
+            style={{ width: "450px", height: "450px" }}
+          ></lord-icon>
+        </ContentNoUser>
+      )}
     </HomeInfosTag>
   );
 };

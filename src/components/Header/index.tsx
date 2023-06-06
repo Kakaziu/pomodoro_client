@@ -1,8 +1,15 @@
 import { FunctionComponent, useState } from "react";
-import { Button, Container, HeaderTag, UserMenu } from "./styled";
+import {
+  Button,
+  Container,
+  ContainerNoUser,
+  HeaderTag,
+  UserMenu,
+} from "./styled";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Logo from "../Logo";
 
 const Header: FunctionComponent = () => {
   const [showMenuUser, setShowMenuUser] = useState(false);
@@ -10,22 +17,26 @@ const Header: FunctionComponent = () => {
 
   return (
     <HeaderTag>
-      <Container>
-        <div>
-          {user ? (
-            <>
-              <span>Hello, Kauã Borba</span>
-              <FaUserCircle
-                size="30"
-                cursor="pointer"
-                onClick={() => setShowMenuUser(!showMenuUser)}
-              />
-            </>
-          ) : (
-            <Link to="/login">Login</Link>
-          )}
-        </div>
-      </Container>
+      {user ? (
+        <Container>
+          <div>
+            <span>Hello, Kauã Borba</span>
+            <FaUserCircle
+              size="30"
+              cursor="pointer"
+              onClick={() => setShowMenuUser(!showMenuUser)}
+            />
+          </div>
+        </Container>
+      ) : (
+        <ContainerNoUser>
+          <div>
+            <Logo />
+          </div>
+
+          <Link to="/login">Login</Link>
+        </ContainerNoUser>
+      )}
       <UserMenu
         height={showMenuUser ? "140px" : "0px"}
         opacity={showMenuUser ? 1 : 0}

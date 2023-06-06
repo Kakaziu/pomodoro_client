@@ -6,16 +6,6 @@ export const HeaderTag = styled.header`
   padding: 20px;
   width: 100%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  h2 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    span {
-      margin-bottom: 3px;
-      margin-left: 10px;
-    }
-  }
 `;
 
 export const Container = styled.div`
@@ -32,6 +22,14 @@ export const Container = styled.div`
       font-size: 17px;
     }
   }
+`;
+
+export const ContainerNoUser = styled.div`
+  display: flex;
+  width: 90%;
+  margin: auto;
+  align-items: center;
+  justify-content: space-between;
 
   a {
     width: 10%;

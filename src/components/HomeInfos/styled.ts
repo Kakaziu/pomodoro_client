@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { IHomeInfos } from "./protocol";
 
-export const HomeInfosTag = styled.div`
+export const HomeInfosTag = styled.div<IHomeInfos>`
   float: right;
-  width: 75%;
+  width: ${(props) => (props.user ? "75%" : "100%")};
 `;
 
 export const TitlePag = styled.div`
@@ -18,4 +19,9 @@ export const TitlePag = styled.div`
     margin-top: 10px;
     font-size: 17px;
   }
+`;
+
+export const ContentNoUser = styled.div`
+  width: 100%;
+  text-align: center;
 `;
