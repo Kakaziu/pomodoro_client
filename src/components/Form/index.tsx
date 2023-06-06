@@ -1,4 +1,5 @@
 import { FormEvent, FunctionComponent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/styled";
 import { FormTag, Camp } from "./styled";
 import { IForm, Inputs, RegisterParams, StateCamps } from "./protocol";
@@ -7,6 +8,8 @@ import api from "../../services/api";
 import { toast } from "react-toastify";
 
 const Form: FunctionComponent<IForm> = ({ type, camps }) => {
+  const navigate = useNavigate();
+
   const [firstName, setFirstName] = useState<StateCamps>({
     value: "",
     error: "",
@@ -49,6 +52,12 @@ const Form: FunctionComponent<IForm> = ({ type, camps }) => {
     if (firstName.value && lastName.value && email.value && password.value) {
       try {
         const response = await api.post("/users", data);
+
+        console.log(response.status);
+
+        if (response.status === 201) {
+          navigate("/");
+        }
       } catch (e: any) {
         toast.error(e.response.data.message);
       }
