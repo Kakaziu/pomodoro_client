@@ -6,6 +6,7 @@ import { IForm, Inputs, RegisterParams, StateCamps } from "./protocol";
 import IconType from "../IconType";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 const Form: FunctionComponent<IForm> = ({ type, camps }) => {
   const navigate = useNavigate();

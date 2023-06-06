@@ -19,3 +19,8 @@ export interface Action {
   type: string;
   payload?: any;
 }
+
+export interface IAuth {
+  user: User;
+  token: string;
+}
