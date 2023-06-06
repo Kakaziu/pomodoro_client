@@ -32,6 +32,25 @@ export const Container = styled.div`
       font-size: 17px;
     }
   }
+
+  a {
+    width: 10%;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    padding: 8px 0px;
+    border-radius: 20px;
+    background-color: #121331;
+    border: none;
+    font-size: 18px;
+    color: white;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: rgba(18, 19, 49, 0.9);
+    }
+  }
 `;
 
 export const UserMenu = styled.div<IUserMenu>`

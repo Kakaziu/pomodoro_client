@@ -1,4 +1,4 @@
-import Form from "../../components/Forms/FormRegister";
+import FormRegister from "../../components/Forms/FormRegister";
 import InfoAccount from "../../components/InfoAccount";
 import { AccountTag } from "../styled";
 
@@ -17,30 +17,7 @@ const Register = () => {
     >
       <AccountTag>
         <InfoAccount type="REGISTER" />
-        <Form
-          type="REGISTER"
-          camps={[
-            {
-              type: "Firstname",
-              inputType: "text",
-            },
-
-            {
-              type: "Lastname",
-              inputType: "text",
-            },
-
-            {
-              type: "E-mail",
-              inputType: "email",
-            },
-
-            {
-              type: "Password",
-              inputType: "password",
-            },
-          ]}
-        />
+        <FormRegister />
       </AccountTag>
     </section>
   );

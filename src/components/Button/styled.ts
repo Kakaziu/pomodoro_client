@@ -6,6 +6,7 @@ export const Button = styled.button<IButton<IBorder>>`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 18px;
   position: relative;
   border-radius: 20px;
   padding: 10px 0px;

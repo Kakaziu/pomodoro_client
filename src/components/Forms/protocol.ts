@@ -3,10 +3,6 @@ export interface Camp {
   inputType: string;
 }
 
-export interface IForm {
-  camps: Camp[];
-}
-
 export type Inputs = "Firstname" | "Lastname" | "E-mail" | "Password";
 
 export interface StateCamps {

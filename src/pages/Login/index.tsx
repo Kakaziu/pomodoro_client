@@ -1,4 +1,4 @@
-import Form from "../../components/Forms/FormRegister";
+import FormLogin from "../../components/Forms/FormLogin";
 import InfoAccount from "../../components/InfoAccount";
 import { AccountTag } from "../styled";
 
@@ -17,20 +17,7 @@ const Login = () => {
     >
       <AccountTag>
         <InfoAccount type="LOGIN" />
-        <Form
-          type="LOGIN"
-          camps={[
-            {
-              type: "E-mail",
-              inputType: "email",
-            },
-
-            {
-              type: "Password",
-              inputType: "password",
-            },
-          ]}
-        />
+        <FormLogin />
       </AccountTag>
     </section>
   );

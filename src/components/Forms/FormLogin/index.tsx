@@ -1,15 +1,15 @@
-import { FormEvent, FunctionComponent, useState } from "react";
+import { FormEvent, FunctionComponent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../Button/styled";
 import { FormTag, Camp } from "../styled";
 import ReactLoading from "react-loading";
-import { IForm, Inputs, LoginParams, StateCamps } from "../protocol";
-import IconType from "../../IconType";
+import { Inputs, LoginParams, StateCamps } from "../protocol";
+import { AiFillMail, AiFillLock } from "react-icons/ai";
 import { loginRequest } from "../../../store/modules/user/userActions";
 import { useSelector } from "react-redux";
 
-const Form: FunctionComponent<IForm> = ({ camps }) => {
+const FormLogin: FunctionComponent = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state: any) => state.UserReducer);
@@ -20,11 +20,9 @@ const Form: FunctionComponent<IForm> = ({ camps }) => {
     error: "",
   });
 
-  function findState(type: Inputs) {
-    if (type === "E-mail") return { type: email, setFuncType: setEmail };
-    if (type === "Password")
-      return { type: password, setFuncType: setPassword };
-  }
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user, navigate]);
 
   async function handleSubmitLogin(e: FormEvent): Promise<void> {
     e.preventDefault();
@@ -54,27 +52,40 @@ const Form: FunctionComponent<IForm> = ({ camps }) => {
   return (
     <FormTag onSubmit={handleSubmitLogin}>
       <h1>SIGN IN</h1>
-      {camps.map((camp) => {
-        return (
-          <Camp key={camp.type}>
-            <span>
-              <IconType type={camp.type} />
-            </span>
-            <input
-              type={camp.inputType}
-              placeholder={camp.type}
-              onChange={(e) =>
-                findState(camp.type)?.setFuncType({
-                  value: e.target.value,
-                  error: "",
-                })
-              }
-              value={findState(camp.type)?.type.value}
-            />
-            <p>{findState(camp.type)?.type.error}</p>
-          </Camp>
-        );
-      })}
+      <Camp>
+        <span>
+          <AiFillMail size="22" color="#121331" />
+        </span>
+        <input
+          type="email"
+          placeholder="E-mail"
+          onChange={(e) =>
+            setEmail({
+              value: e.target.value,
+              error: "",
+            })
+          }
+          value={email.value}
+        />
+        <p>{email.error}</p>
+      </Camp>
+      <Camp>
+        <span>
+          <AiFillLock size="22" color="#121331" />
+        </span>
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) =>
+            setPassword({
+              value: e.target.value,
+              error: "",
+            })
+          }
+          value={password.value}
+        />
+        <p>{password.error}</p>
+      </Camp>
 
       <Button
         width="35%"
@@ -102,4 +113,4 @@ const Form: FunctionComponent<IForm> = ({ camps }) => {
   );
 };
 
-export default Form;
+export default FormLogin;

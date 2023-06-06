@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../Button/styled";
 import { FormTag, Camp } from "../styled";
 import ReactLoading from "react-loading";
-import { IForm, Inputs, RegisterParams, StateCamps } from "../protocol";
-import IconType from "../../IconType";
+import { Inputs, RegisterParams, StateCamps } from "../protocol";
+import { RiUserFill, RiUser2Fill } from "react-icons/ri";
+import { AiFillMail, AiFillLock } from "react-icons/ai";
 import api from "../../../services/api";
 import { toast } from "react-toastify";
 
-const FormRegister: FunctionComponent<IForm> = ({ camps }) => {
+const FormRegister: FunctionComponent = () => {
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState<StateCamps>({
@@ -25,16 +26,6 @@ const FormRegister: FunctionComponent<IForm> = ({ camps }) => {
     error: "",
   });
   const [loading, setLoading] = useState(false);
-
-  function findState(type: Inputs) {
-    if (type === "Firstname")
-      return { type: firstName, setFuncType: setFirstName };
-    if (type === "Lastname")
-      return { type: lastName, setFuncType: setLastName };
-    if (type === "E-mail") return { type: email, setFuncType: setEmail };
-    if (type === "Password")
-      return { type: password, setFuncType: setPassword };
-  }
 
   async function handleSubmitRegister(e: FormEvent): Promise<void> {
     e.preventDefault();
@@ -77,27 +68,77 @@ const FormRegister: FunctionComponent<IForm> = ({ camps }) => {
   return (
     <FormTag onSubmit={handleSubmitRegister}>
       <h1>SIGN UP</h1>
-      {camps.map((camp) => {
-        return (
-          <Camp key={camp.type}>
-            <span>
-              <IconType type={camp.type} />
-            </span>
-            <input
-              type={camp.inputType}
-              placeholder={camp.type}
-              onChange={(e) =>
-                findState(camp.type)?.setFuncType({
-                  value: e.target.value,
-                  error: "",
-                })
-              }
-              value={findState(camp.type)?.type.value}
-            />
-            <p>{findState(camp.type)?.type.error}</p>
-          </Camp>
-        );
-      })}
+      <Camp>
+        <span>
+          <RiUserFill size="22" color="#121331" />
+        </span>
+        <input
+          type="text"
+          placeholder="Firstname"
+          onChange={(e) =>
+            setFirstName({
+              value: e.target.value,
+              error: "",
+            })
+          }
+          value={firstName.value}
+        />
+        <p>{firstName.error}</p>
+      </Camp>
+
+      <Camp>
+        <span>
+          <RiUser2Fill size="22" color="#121331" />
+        </span>
+        <input
+          type="text"
+          placeholder="Lastname"
+          onChange={(e) =>
+            setLastName({
+              value: e.target.value,
+              error: "",
+            })
+          }
+          value={lastName.value}
+        />
+        <p>{lastName.error}</p>
+      </Camp>
+
+      <Camp>
+        <span>
+          <AiFillMail size="22" color="#121331" />
+        </span>
+        <input
+          type="email"
+          placeholder="E-mail"
+          onChange={(e) =>
+            setEmail({
+              value: e.target.value,
+              error: "",
+            })
+          }
+          value={email.value}
+        />
+        <p>{email.error}</p>
+      </Camp>
+
+      <Camp>
+        <span>
+          <AiFillLock size="22" color="#121331" />
+        </span>
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) =>
+            setPassword({
+              value: e.target.value,
+              error: "",
+            })
+          }
+          value={password.value}
+        />
+        <p>{password.error}</p>
+      </Camp>
 
       <Button
         width="35%"
