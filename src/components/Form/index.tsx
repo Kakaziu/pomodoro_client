@@ -1,15 +1,23 @@
 import { FormEvent, FunctionComponent, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/styled";
 import { FormTag, Camp } from "./styled";
-import { IForm, Inputs, RegisterParams, StateCamps } from "./protocol";
+import {
+  IForm,
+  Inputs,
+  LoginParams,
+  RegisterParams,
+  StateCamps,
+} from "./protocol";
 import IconType from "../IconType";
 import api from "../../services/api";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
+import { loginRequest } from "../../store/modules/user/userActions";
 
 const Form: FunctionComponent<IForm> = ({ type, camps }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [firstName, setFirstName] = useState<StateCamps>({
     value: "",
@@ -35,7 +43,7 @@ const Form: FunctionComponent<IForm> = ({ type, camps }) => {
       return { type: password, setFuncType: setPassword };
   }
 
-  async function handleSubmit(e: FormEvent): Promise<void> {
+  async function handleSubmitRegister(e: FormEvent): Promise<void> {
     e.preventDefault();
 
     validCamps(firstName.value, setFirstName, "Firstname");
@@ -54,14 +62,28 @@ const Form: FunctionComponent<IForm> = ({ type, camps }) => {
       try {
         const response = await api.post("/users", data);
 
-        console.log(response.status);
-
         if (response.status === 201) {
           navigate("/");
         }
       } catch (e: any) {
         toast.error(e.response.data.message);
       }
+    }
+  }
+
+  async function handleSubmitLogin(e: FormEvent): Promise<void> {
+    e.preventDefault();
+
+    validCamps(email.value, setEmail, "E-mail");
+    validCamps(password.value, setPassword, "Password");
+
+    const data: LoginParams = {
+      email: email.value,
+      password: password.value,
+    };
+
+    if (email.value && password.value) {
+      dispatch(loginRequest(data));
     }
   }
 
@@ -75,7 +97,10 @@ const Form: FunctionComponent<IForm> = ({ type, camps }) => {
   }
 
   return (
-    <FormTag onSubmit={handleSubmit}>
+    <FormTag
+      onSubmit={type === "REGISTER" ? handleSubmitRegister : handleSubmitLogin}
+    >
+      <button onClick={() => console.log(user)}>oi</button>
       <h1>{type === "REGISTER" ? "SIGN UP" : "SIGN IN"}</h1>
       {camps.map((camp) => {
         return (
