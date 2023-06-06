@@ -3,6 +3,10 @@ import { IBorder, IButton } from "./protocol";
 
 export const Button = styled.button<IButton<IBorder>>`
   margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   border-radius: 20px;
   padding: 10px 0px;
   transition: 0.3s;
@@ -18,5 +22,10 @@ export const Button = styled.button<IButton<IBorder>>`
   &:hover {
     background-color: ${(props) => props.hoverBackgroundColor};
     color: ${(props) => props.hoverColor};
+  }
+
+  span {
+    position: absolute;
+    right: 30px;
   }
 `;

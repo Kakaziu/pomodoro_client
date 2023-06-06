@@ -1,32 +1,19 @@
 import { FormEvent, FunctionComponent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../Button/styled";
-import { FormTag, Camp } from "./styled";
-import {
-  IForm,
-  Inputs,
-  LoginParams,
-  RegisterParams,
-  StateCamps,
-} from "./protocol";
-import IconType from "../IconType";
-import api from "../../services/api";
-import { toast } from "react-toastify";
-import { loginRequest } from "../../store/modules/user/userActions";
+import { Button } from "../../Button/styled";
+import { FormTag, Camp } from "../styled";
+import ReactLoading from "react-loading";
+import { IForm, Inputs, LoginParams, StateCamps } from "../protocol";
+import IconType from "../../IconType";
+import { loginRequest } from "../../../store/modules/user/userActions";
+import { useSelector } from "react-redux";
 
-const Form: FunctionComponent<IForm> = ({ type, camps }) => {
+const Form: FunctionComponent<IForm> = ({ camps }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { user, loading } = useSelector((state: any) => state.UserReducer);
 
-  const [firstName, setFirstName] = useState<StateCamps>({
-    value: "",
-    error: "",
-  });
-  const [lastName, setLastName] = useState<StateCamps>({
-    value: "",
-    error: "",
-  });
   const [email, setEmail] = useState<StateCamps>({ value: "", error: "" });
   const [password, setPassword] = useState<StateCamps>({
     value: "",
@@ -34,41 +21,9 @@ const Form: FunctionComponent<IForm> = ({ type, camps }) => {
   });
 
   function findState(type: Inputs) {
-    if (type === "Firstname")
-      return { type: firstName, setFuncType: setFirstName };
-    if (type === "Lastname")
-      return { type: lastName, setFuncType: setLastName };
     if (type === "E-mail") return { type: email, setFuncType: setEmail };
     if (type === "Password")
       return { type: password, setFuncType: setPassword };
-  }
-
-  async function handleSubmitRegister(e: FormEvent): Promise<void> {
-    e.preventDefault();
-
-    validCamps(firstName.value, setFirstName, "Firstname");
-    validCamps(lastName.value, setLastName, "Lastname");
-    validCamps(email.value, setEmail, "E-mail");
-    validCamps(password.value, setPassword, "Password");
-
-    const data: RegisterParams = {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      email: email.value,
-      password: password.value,
-    };
-
-    if (firstName.value && lastName.value && email.value && password.value) {
-      try {
-        const response = await api.post("/users", data);
-
-        if (response.status === 201) {
-          navigate("/");
-        }
-      } catch (e: any) {
-        toast.error(e.response.data.message);
-      }
-    }
   }
 
   async function handleSubmitLogin(e: FormEvent): Promise<void> {
@@ -97,11 +52,8 @@ const Form: FunctionComponent<IForm> = ({ type, camps }) => {
   }
 
   return (
-    <FormTag
-      onSubmit={type === "REGISTER" ? handleSubmitRegister : handleSubmitLogin}
-    >
-      <button onClick={() => console.log(user)}>oi</button>
-      <h1>{type === "REGISTER" ? "SIGN UP" : "SIGN IN"}</h1>
+    <FormTag onSubmit={handleSubmitLogin}>
+      <h1>SIGN IN</h1>
       {camps.map((camp) => {
         return (
           <Camp key={camp.type}>
@@ -132,7 +84,19 @@ const Form: FunctionComponent<IForm> = ({ type, camps }) => {
         hoverBackgroundColor="rgba(18, 19, 49, 0.9)"
         hoverColor="white"
       >
-        {type === "REGISTER" ? "SIGN UP" : "SIGN IN"}
+        SIGN IN
+        {loading ? (
+          <span>
+            <ReactLoading
+              type="spin"
+              color="white"
+              height="20px"
+              width="20px"
+            />
+          </span>
+        ) : (
+          <></>
+        )}
       </Button>
     </FormTag>
   );

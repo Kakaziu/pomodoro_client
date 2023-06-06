@@ -20,8 +20,8 @@ function* login(action: Action): Generator<CallEffect | PutEffect<Action>> {
 
     yield put(loginSuccess(response.data.user));
   } catch (e: any) {
-    yield put(loginFailure(e.response.data.errors));
-    toast.error(e.response.status.message);
+    toast.error(e.response.data.message);
+    yield put(loginFailure(e.response.data.message));
   }
 }
 
