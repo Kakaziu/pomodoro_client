@@ -48,7 +48,7 @@ const FormRegister: FunctionComponent = () => {
         const response = await api.post("/users", data);
 
         if (response.status === 201) {
-          navigate("/");
+          navigate("/login");
         }
       } catch (e: any) {
         toast.error(e.response.data.message);
