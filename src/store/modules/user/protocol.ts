@@ -1,3 +1,9 @@
+export interface State {
+  user: User | null;
+  error: Error | null;
+  loading: boolean;
+}
+
 export interface User {
   id: string;
   firstName: string;

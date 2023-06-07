@@ -29,7 +29,7 @@ const Header: FunctionComponent = () => {
       {user ? (
         <Container>
           <div>
-            <span>Hello, Kauã Borba</span>
+            <span>Hello, {user.firstName + " " + user.lastName}</span>
             <FaUserCircle
               size="30"
               cursor="pointer"

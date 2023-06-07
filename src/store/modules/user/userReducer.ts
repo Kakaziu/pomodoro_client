@@ -1,6 +1,6 @@
-import { Action } from "./protocol";
+import { Action, State } from "./protocol";
 
-const initialState = { user: null, error: null, loading: false };
+const initialState: State = { user: null, error: null, loading: false };
 
 export default function UserReducer(state = initialState, action: Action) {
   switch (action.type) {
