@@ -24,7 +24,7 @@ const HomeInfos: FunctionComponent = () => {
             trigger="loop"
             delay="2500"
             colors="primary:#3a3347,secondary:#f24c00,tertiary:#4bb3fd,quaternary:#ebe6ef"
-            style={{ width: "450px", height: "450px" }}
+            style={{ width: "420px", height: "420px" }}
           ></lord-icon>
         </ContentNoUser>
       )}

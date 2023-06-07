@@ -10,10 +10,19 @@ import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Logo from "../Logo";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/modules/user/userActions";
 
 const Header: FunctionComponent = () => {
   const [showMenuUser, setShowMenuUser] = useState(false);
   const { user } = useSelector((state: any) => state.UserReducer);
+  const dispatch = useDispatch();
+
+  function handlelogout() {
+    dispatch(logout());
+    localStorage.removeItem("token");
+    setShowMenuUser(false);
+  }
 
   return (
     <HeaderTag>
@@ -44,7 +53,11 @@ const Header: FunctionComponent = () => {
         <Button background="#0062ff" hoverColor="#004bc4">
           Criar pomodoro
         </Button>
-        <Button background="#ed0c1b" hoverColor="#b30914">
+        <Button
+          background="#ed0c1b"
+          hoverColor="#b30914"
+          onClick={handlelogout}
+        >
           Logout
         </Button>
       </UserMenu>
