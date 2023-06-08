@@ -16,6 +16,12 @@ export const Form = styled.form`
     border-radius: 4px;
     background-color: #0ee363;
     color: white;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #32a852;
+    }
   }
 `;
 

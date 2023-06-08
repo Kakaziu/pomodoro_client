@@ -12,8 +12,9 @@ import { Link } from "react-router-dom";
 import Logo from "../Logo";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/modules/user/userActions";
+import { IHeader } from "./protocol";
 
-const Header: FunctionComponent = () => {
+const Header: FunctionComponent<IHeader> = ({ setShowModal }) => {
   const [showMenuUser, setShowMenuUser] = useState(false);
   const { user } = useSelector((state: any) => state.UserReducer);
   const dispatch = useDispatch();
@@ -50,7 +51,11 @@ const Header: FunctionComponent = () => {
         height={showMenuUser ? "140px" : "0px"}
         opacity={showMenuUser ? 1 : 0}
       >
-        <Button background="#0062ff" hoverColor="#004bc4">
+        <Button
+          background="#0062ff"
+          hoverColor="#004bc4"
+          onClick={() => setShowModal(true)}
+        >
           Criar pomodoro
         </Button>
         <Button

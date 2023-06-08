@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { IModalTag } from "./protocol";
 
-export const ModalTag = styled.div`
+export const ModalTag = styled.div<IModalTag>`
   position: absolute;
   width: 100%;
   height: 100vh;
@@ -11,4 +12,5 @@ export const ModalTag = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  display: ${(props) => (props.showModal ? "flex" : "none")};
 `;

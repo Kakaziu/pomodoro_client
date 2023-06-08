@@ -3,14 +3,17 @@ import SideBarr from "../../components/SideBarr";
 import HomeInfos from "../../components/HomeInfos";
 import Modal from "../../components/Modal";
 import ModalForm from "../../components/ModalForm";
+import { useState } from "react";
 
 const Home = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <section id="home">
-      <Header />
+      <Header setShowModal={setShowModal} />
       <SideBarr />
       <HomeInfos />
-      <Modal>
+      <Modal showModal={showModal} setShowModal={setShowModal}>
         <ModalForm />
       </Modal>
     </section>
