@@ -10,5 +10,5 @@ export const createPomodoroSuccess = (pomodoro: Pomodoro) => {
 };
 
 export const createPomodoroFailure = (error: Error) => {
-  return { type: "CREATE_POMODORO_SUCCESS", payload: error };
+  return { type: "CREATE_POMODORO_FAILURE", payload: error };
 };

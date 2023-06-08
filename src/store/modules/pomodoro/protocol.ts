@@ -1,3 +1,11 @@
+import { Error } from "../protocol";
+
+export interface PomodoroState {
+  pomodoros: Pomodoro[];
+  error: Error | null;
+  loading: boolean;
+}
+
 export interface Pomodoro {
   id: string;
   title: string;

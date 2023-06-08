@@ -1,3 +1,5 @@
+import { Pomodoro } from "../protocol";
+
 export const readPomodoroRequest = () => {
   return { type: "READ_POMODORO_REQUEST" };
 };

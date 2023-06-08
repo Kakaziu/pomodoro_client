@@ -12,5 +12,5 @@ export const updatePomodoroSuccess = (pomodoro: Pomodoro) => {
 };
 
 export const updatePomodoroFailure = (error: Error) => {
-  return { type: "UPDATE_POMODORO_SUCCESS", payload: error };
+  return { type: "UPDATE_POMODORO_FAILURE", payload: error };
 };

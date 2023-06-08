@@ -9,5 +9,5 @@ export const deletePomodoroSuccess = (pomodoro: Pomodoro) => {
 };
 
 export const deletePomodoroFailure = (error: Error) => {
-  return { type: "DELETE_POMODORO_SUCCESS", payload: error };
+  return { type: "DELETE_POMODORO_FAILURE", payload: error };
 };
