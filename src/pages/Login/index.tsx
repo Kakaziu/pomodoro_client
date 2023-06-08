@@ -1,4 +1,4 @@
-import FormLogin from "../../components/Forms/FormLogin";
+import FormLogin from "../../components/AccountForms/FormLogin";
 import InfoAccount from "../../components/InfoAccount";
 import { AccountTag } from "../styled";
 
