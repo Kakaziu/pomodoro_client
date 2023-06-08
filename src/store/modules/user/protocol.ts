@@ -1,4 +1,4 @@
-export interface State {
+export interface UserState {
   user: User | null;
   error: Error | null;
   loading: boolean;
@@ -19,11 +19,6 @@ export interface UserLoginParams {
 
 export interface Error {
   message: string;
-}
-
-export interface Action {
-  type: string;
-  payload?: any;
 }
 
 export interface IAuth {

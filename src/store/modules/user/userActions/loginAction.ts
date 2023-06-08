@@ -1,4 +1,5 @@
-import { Error, User, UserLoginParams } from "./protocol";
+import { Error } from "../../protocol";
+import { User, UserLoginParams } from "../protocol";
 
 export const loginRequest = (user: UserLoginParams) => {
   return { type: "LOGIN_REQUEST", payload: user };
@@ -10,8 +11,4 @@ export const loginSuccess = (user: User) => {
 
 export const loginFailure = (error: Error) => {
   return { type: "LOGIN_FAILURE", payload: error };
-};
-
-export const logout = () => {
-  return { type: "LOGOUT" };
 };

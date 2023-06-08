@@ -6,10 +6,11 @@ import {
   CallEffect,
   PutEffect,
 } from "redux-saga/effects";
-import { Action, IAuth } from "./protocol";
+import { Action } from "../protocol";
+import { IAuth } from "./protocol";
 import { toast } from "react-toastify";
 import api from "../../../services/api";
-import { loginFailure, loginSuccess } from "./userActions";
+import { loginFailure, loginSuccess } from "./userActions/loginAction";
 
 function* login(action: Action): Generator<CallEffect | PutEffect<Action>> {
   try {
