@@ -27,3 +27,5 @@ function* createPomodoro(
     yield put(createPomodoroFailure(e.response.data.message));
   }
 }
+
+export default all([takeLatest("CREATE_POMODORO_REQUEST", createPomodoro)]);

@@ -6,8 +6,9 @@ import { FormTag, Camp } from "../styled";
 import ReactLoading from "react-loading";
 import { Inputs, LoginParams, StateCamps } from "../protocol";
 import { AiFillMail, AiFillLock } from "react-icons/ai";
-import { loginRequest } from "../../../store/modules/user/userActions";
+
 import { useSelector } from "react-redux";
+import { loginRequest } from "../../../store/modules/user/userActions/loginAction";
 
 const FormLogin: FunctionComponent = () => {
   const navigate = useNavigate();

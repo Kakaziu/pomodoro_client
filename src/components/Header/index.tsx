@@ -11,8 +11,9 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Logo from "../Logo";
 import { useDispatch } from "react-redux";
-import { logout } from "../../store/modules/user/userActions";
+
 import { IHeader } from "./protocol";
+import { logout } from "../../store/modules/user/userActions/logoutActions";
 
 const Header: FunctionComponent<IHeader> = ({ setShowModal }) => {
   const [showMenuUser, setShowMenuUser] = useState(false);

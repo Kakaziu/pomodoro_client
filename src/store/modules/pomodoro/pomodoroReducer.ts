@@ -87,5 +87,7 @@ export default function PomodoroReducer(state = initialState, action: Action) {
         error: action.payload,
         loading: false,
       });
+    default:
+      return state;
   }
 }

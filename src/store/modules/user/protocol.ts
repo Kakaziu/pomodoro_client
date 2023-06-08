@@ -17,10 +17,6 @@ export interface UserLoginParams {
   password: string;
 }
 
-export interface Error {
-  message: string;
-}
-
 export interface IAuth {
   user: User;
   token: string;
