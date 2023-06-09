@@ -9,6 +9,7 @@ import api from "../../../services/api";
 import { RegisterParams, StateCamps } from "../protocol";
 import { FormTag, Camp } from "../styled";
 import validEmptyCamps from "../../../utils/validEmptyCamps";
+import validEmail from "../../../utils/validEmail";
 
 const FormRegister: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -35,6 +36,9 @@ const FormRegister: FunctionComponent = () => {
     validEmptyCamps(setLastName, lastName);
     validEmptyCamps(setEmail, email);
     validEmptyCamps(setPassword, password);
+
+    if (!validEmail(email.value))
+      return setEmail({ value: "", error: "E-mail inválido." });
 
     const data: RegisterParams = {
       firstName: firstName.value,

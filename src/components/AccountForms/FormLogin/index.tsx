@@ -10,6 +10,7 @@ import { Button } from "../../Button/styled";
 import { FormTag, Camp } from "../styled";
 import { LoginParams, StateCamps } from "../protocol";
 import validEmptyCamps from "../../../utils/validEmptyCamps";
+import validEmail from "../../../utils/validEmail";
 
 const FormLogin: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -31,6 +32,9 @@ const FormLogin: FunctionComponent = () => {
 
     validEmptyCamps(setEmail, email);
     validEmptyCamps(setPassword, password);
+
+    if (!validEmail(email.value))
+      return setEmail({ value: "", error: "E-mail inválido." });
 
     const data: LoginParams = {
       email: email.value,
