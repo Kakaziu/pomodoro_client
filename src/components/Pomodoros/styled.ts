@@ -92,3 +92,14 @@ export const PomodoroInfos = styled.div`
     margin-top: 5px;
   }
 `;
+
+export const LoadingTag = styled.h2`
+  margin: auto;
+  font-size: 30px;
+  color: #121331;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 150px;
+  height: 40px;
+`;
