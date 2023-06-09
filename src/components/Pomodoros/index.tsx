@@ -1,11 +1,9 @@
 import { FunctionComponent, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { Pomodoro as IPomodoro } from "../../store/modules/pomodoro/protocol";
 import { Pomodoro, PomodoroInfos, PomodorosTag } from "./styled";
-import { AiFillDelete } from "react-icons/ai";
-import { AiFillEdit } from "react-icons/ai";
-import { useDispatch } from "react-redux";
 import { readPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/readActions";
-import { useSelector } from "react-redux";
 import { State } from "../../store/protocol";
 
 const Pomodoros: FunctionComponent = () => {

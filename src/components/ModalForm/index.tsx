@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
+import { FormEvent, FunctionComponent, useEffect, useState } from "react";
 import { Camp, Camps, Form, TimeCamp, TimeCamps } from "./styled";
 import { createPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/createActions";
-import { FormEvent, FunctionComponent, useEffect, useState } from "react";
 import { IModalForm } from "./protocol";
 
 const ModalForm: FunctionComponent<IModalForm> = ({ showModal }) => {

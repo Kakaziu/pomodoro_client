@@ -1,15 +1,14 @@
 import { FormEvent, FunctionComponent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../Button/styled";
-import { FormTag, Camp } from "../styled";
 import ReactLoading from "react-loading";
-import { Inputs, LoginParams, StateCamps } from "../protocol";
-import { AiFillMail, AiFillLock } from "react-icons/ai";
-
 import { useSelector } from "react-redux";
+import { AiFillMail, AiFillLock } from "react-icons/ai";
 import { loginRequest } from "../../../store/modules/user/userActions/loginAction";
 import { State } from "../../../store/protocol";
+import { Button } from "../../Button/styled";
+import { FormTag, Camp } from "../styled";
+import { Inputs, LoginParams, StateCamps } from "../protocol";
 
 const FormLogin: FunctionComponent = () => {
   const navigate = useNavigate();

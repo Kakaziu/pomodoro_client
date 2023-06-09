@@ -1,13 +1,13 @@
 import { FormEvent, FunctionComponent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../Button/styled";
-import { FormTag, Camp } from "../styled";
 import ReactLoading from "react-loading";
-import { Inputs, RegisterParams, StateCamps } from "../protocol";
+import { toast } from "react-toastify";
 import { RiUserFill, RiUser2Fill } from "react-icons/ri";
 import { AiFillMail, AiFillLock } from "react-icons/ai";
+import { Button } from "../../Button/styled";
 import api from "../../../services/api";
-import { toast } from "react-toastify";
+import { Inputs, RegisterParams, StateCamps } from "../protocol";
+import { FormTag, Camp } from "../styled";
 
 const FormRegister: FunctionComponent = () => {
   const navigate = useNavigate();

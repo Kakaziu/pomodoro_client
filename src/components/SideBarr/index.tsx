@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
-import { Aside, Container } from "./styled";
 import { BiTimeFive } from "react-icons/bi";
 import { MdTimeline } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { Aside, Container } from "./styled";
 import Logo from "../Logo";
 
 const SideBarr: FunctionComponent = () => {

@@ -1,4 +1,12 @@
 import { FunctionComponent, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { FaUserCircle } from "react-icons/fa";
+import Logo from "../Logo";
+import { IHeader } from "./protocol";
+import { logout } from "../../store/modules/user/userActions/logoutActions";
+import { State } from "../../store/protocol";
 import {
   Button,
   Container,
@@ -6,15 +14,6 @@ import {
   HeaderTag,
   UserMenu,
 } from "./styled";
-import { FaUserCircle } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import Logo from "../Logo";
-import { useDispatch } from "react-redux";
-
-import { IHeader } from "./protocol";
-import { logout } from "../../store/modules/user/userActions/logoutActions";
-import { State } from "../../store/protocol";
 
 const Header: FunctionComponent<IHeader> = ({ setShowModal }) => {
   const [showMenuUser, setShowMenuUser] = useState(false);
