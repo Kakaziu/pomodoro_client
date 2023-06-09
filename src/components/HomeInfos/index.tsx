@@ -2,9 +2,10 @@ import { FunctionComponent } from "react";
 import { ContentNoUser, HomeInfosTag, TitlePag } from "./styled";
 import Pomodoros from "../Pomodoros";
 import { useSelector } from "react-redux";
+import { State } from "../../store/protocol";
 
 const HomeInfos: FunctionComponent = () => {
-  const { user } = useSelector((state: any) => state.UserReducer);
+  const { user } = useSelector((state: State) => state.UserReducer);
 
   return (
     <HomeInfosTag user={user}>

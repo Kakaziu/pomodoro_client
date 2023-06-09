@@ -9,11 +9,12 @@ import { AiFillMail, AiFillLock } from "react-icons/ai";
 
 import { useSelector } from "react-redux";
 import { loginRequest } from "../../../store/modules/user/userActions/loginAction";
+import { State } from "../../../store/protocol";
 
 const FormLogin: FunctionComponent = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, loading } = useSelector((state: any) => state.UserReducer);
+  const { user, loading } = useSelector((state: State) => state.UserReducer);
 
   const [email, setEmail] = useState<StateCamps>({ value: "", error: "" });
   const [password, setPassword] = useState<StateCamps>({

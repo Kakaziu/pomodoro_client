@@ -3,7 +3,6 @@ import { Camp, Camps, Form, TimeCamp, TimeCamps } from "./styled";
 import { createPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/createActions";
 import { FormEvent, FunctionComponent, useEffect, useState } from "react";
 import { IModalForm } from "./protocol";
-import { toast } from "react-toastify";
 
 const ModalForm: FunctionComponent<IModalForm> = ({ showModal }) => {
   const [task, setTask] = useState<string>("");

@@ -6,10 +6,11 @@ import { AiFillEdit } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { readPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/readActions";
 import { useSelector } from "react-redux";
+import { State } from "../../store/protocol";
 
 const Pomodoros: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const { pomodoros } = useSelector((state: any) => state.PomodoroReducer);
+  const { pomodoros } = useSelector((state: State) => state.PomodoroReducer);
 
   useEffect(() => {
     dispatch(readPomodoroRequest());

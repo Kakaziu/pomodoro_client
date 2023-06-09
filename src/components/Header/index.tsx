@@ -14,10 +14,11 @@ import { useDispatch } from "react-redux";
 
 import { IHeader } from "./protocol";
 import { logout } from "../../store/modules/user/userActions/logoutActions";
+import { State } from "../../store/protocol";
 
 const Header: FunctionComponent<IHeader> = ({ setShowModal }) => {
   const [showMenuUser, setShowMenuUser] = useState(false);
-  const { user } = useSelector((state: any) => state.UserReducer);
+  const { user } = useSelector((state: State) => state.UserReducer);
   const dispatch = useDispatch();
 
   function handlelogout() {
