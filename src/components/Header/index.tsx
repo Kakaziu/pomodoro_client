@@ -16,8 +16,8 @@ import {
 } from "./styled";
 
 const Header: FunctionComponent<IHeader> = ({ setShowModal }) => {
-  const [showMenuUser, setShowMenuUser] = useState(false);
   const { user } = useSelector((state: State) => state.UserReducer);
+  const [showMenuUser, setShowMenuUser] = useState(false);
   const dispatch = useDispatch();
 
   function handlelogout() {
@@ -55,7 +55,10 @@ const Header: FunctionComponent<IHeader> = ({ setShowModal }) => {
         <Button
           background="#0062ff"
           hoverColor="#004bc4"
-          onClick={() => setShowModal(true)}
+          onClick={() => {
+            setShowModal(true);
+            setShowMenuUser(false);
+          }}
         >
           Criar pomodoro
         </Button>
