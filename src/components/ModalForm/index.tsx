@@ -7,23 +7,12 @@ import { toast } from "react-toastify";
 
 const ModalForm: FunctionComponent<IModalForm> = ({ showModal }) => {
   const [task, setTask] = useState<string>("");
-  const [pomodoroTime, setPomodoroTime] = useState<number | undefined>(
-    undefined
-  );
-  const [pomodoroShortResting, setPomodoroShortResting] = useState<
-    number | undefined
-  >(undefined);
-  const [pomodoroLongResting, setPomodoroLongResting] = useState<
-    number | undefined
-  >(undefined);
+  const [pomodoroTime, setPomodoroTime] = useState<number>(0);
+  const [pomodoroShortResting, setPomodoroShortResting] = useState<number>(0);
+  const [pomodoroLongResting, setPomodoroLongResting] = useState<number>(0);
 
   useEffect(() => {
-    if (!showModal) {
-      setTask("");
-      setPomodoroTime(undefined);
-      setPomodoroShortResting(undefined);
-      setPomodoroLongResting(undefined);
-    }
+    if (!showModal) setCamps();
   }, [showModal]);
 
   const dispatch = useDispatch();
@@ -38,16 +27,15 @@ const ModalForm: FunctionComponent<IModalForm> = ({ showModal }) => {
       timeLongResting: pomodoroLongResting,
     };
 
-    validCamps(pomodoroData.title);
-    validCamps(pomodoroData.timeWorking);
-    validCamps(pomodoroData.timeShortResting);
-    validCamps(pomodoroData.timeLongResting);
-
+    setCamps();
     dispatch(createPomodoroRequest(pomodoroData));
   }
 
-  function validCamps(camp: unknown) {
-    if (!camp) return toast.warn(`${camp} está vazio.`);
+  function setCamps() {
+    setTask("");
+    setPomodoroTime(0);
+    setPomodoroShortResting(0);
+    setPomodoroLongResting(0);
   }
 
   return (
