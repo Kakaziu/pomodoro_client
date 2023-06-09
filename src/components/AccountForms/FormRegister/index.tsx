@@ -6,8 +6,9 @@ import { RiUserFill, RiUser2Fill } from "react-icons/ri";
 import { AiFillMail, AiFillLock } from "react-icons/ai";
 import { Button } from "../../Button/styled";
 import api from "../../../services/api";
-import { Inputs, RegisterParams, StateCamps } from "../protocol";
+import { RegisterParams, StateCamps } from "../protocol";
 import { FormTag, Camp } from "../styled";
+import validEmptyCamps from "../../../utils/validEmptyCamps";
 
 const FormRegister: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -30,10 +31,10 @@ const FormRegister: FunctionComponent = () => {
   async function handleSubmitRegister(e: FormEvent): Promise<void> {
     e.preventDefault();
 
-    validCamps(firstName.value, setFirstName, "Firstname");
-    validCamps(lastName.value, setLastName, "Lastname");
-    validCamps(email.value, setEmail, "E-mail");
-    validCamps(password.value, setPassword, "Password");
+    validEmptyCamps(setFirstName, firstName);
+    validEmptyCamps(setLastName, lastName);
+    validEmptyCamps(setEmail, email);
+    validEmptyCamps(setPassword, password);
 
     const data: RegisterParams = {
       firstName: firstName.value,
@@ -54,15 +55,6 @@ const FormRegister: FunctionComponent = () => {
         toast.error(e.response.data.message);
       }
     }
-  }
-
-  function validCamps(
-    value: string,
-    setFunc: React.Dispatch<React.SetStateAction<StateCamps>>,
-    camp: Inputs
-  ) {
-    if (!value)
-      return setFunc({ value: "", error: `* O campo '${camp}' está vazio` });
   }
 
   return (

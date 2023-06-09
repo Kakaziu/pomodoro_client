@@ -8,7 +8,8 @@ import { loginRequest } from "../../../store/modules/user/userActions/loginActio
 import { State } from "../../../store/protocol";
 import { Button } from "../../Button/styled";
 import { FormTag, Camp } from "../styled";
-import { Inputs, LoginParams, StateCamps } from "../protocol";
+import { LoginParams, StateCamps } from "../protocol";
+import validEmptyCamps from "../../../utils/validEmptyCamps";
 
 const FormLogin: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -28,8 +29,8 @@ const FormLogin: FunctionComponent = () => {
   async function handleSubmitLogin(e: FormEvent): Promise<void> {
     e.preventDefault();
 
-    validCamps(email.value, setEmail, "E-mail");
-    validCamps(password.value, setPassword, "Password");
+    validEmptyCamps(setEmail, email);
+    validEmptyCamps(setPassword, password);
 
     const data: LoginParams = {
       email: email.value,
@@ -39,15 +40,6 @@ const FormLogin: FunctionComponent = () => {
     if (email.value && password.value) {
       dispatch(loginRequest(data));
     }
-  }
-
-  function validCamps(
-    value: string,
-    setFunc: React.Dispatch<React.SetStateAction<StateCamps>>,
-    camp: Inputs
-  ) {
-    if (!value)
-      return setFunc({ value: "", error: `* O campo '${camp}' está vazio` });
   }
 
   return (

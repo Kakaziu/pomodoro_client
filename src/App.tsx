@@ -1,10 +1,10 @@
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import GlobalStyles from "./GlobalStyles";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
 import store from "./store";
 
