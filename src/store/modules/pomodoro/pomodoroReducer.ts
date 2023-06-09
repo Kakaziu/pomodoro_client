@@ -18,7 +18,7 @@ export default function PomodoroReducer(state = initialState, action: Action) {
 
     case "READ_POMODORO_SUCCESS":
       return (state = {
-        pomodoros: [action.payload],
+        pomodoros: [...action.payload],
         error: null,
         loading: false,
       });

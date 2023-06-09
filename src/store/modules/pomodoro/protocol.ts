@@ -19,10 +19,10 @@ export interface Pomodoro {
 }
 
 export interface PomodoroParams {
-  title: string;
-  timeWorking: number;
-  timeShortResting: number;
-  timeLongResting: number;
+  title?: string;
+  timeWorking?: number;
+  timeShortResting?: number;
+  timeLongResting?: number;
 }
 
 export type UpdatePomodoroParams = Partial<PomodoroParams>;

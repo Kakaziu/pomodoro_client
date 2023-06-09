@@ -60,10 +60,16 @@ export const TimeCamp = styled.div`
   }
 
   input {
-    width: 60px;
+    width: 80px;
     height: 40px;
     padding: 20px;
     outline: 0;
+
+    &::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
 
     &:focus {
       border: 2px solid blue;
