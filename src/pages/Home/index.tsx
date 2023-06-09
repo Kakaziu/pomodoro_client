@@ -14,7 +14,7 @@ const Home = () => {
       <SideBarr />
       <HomeInfos />
       <Modal showModal={showModal} setShowModal={setShowModal}>
-        <ModalForm showModal={showModal} />
+        <ModalForm showModal={showModal} setShowModal={setShowModal} />
       </Modal>
     </section>
   );

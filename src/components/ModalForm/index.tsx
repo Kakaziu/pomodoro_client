@@ -4,7 +4,10 @@ import { Camp, Camps, Form, TimeCamp, TimeCamps } from "./styled";
 import { createPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/createActions";
 import { IModalForm } from "./protocol";
 
-const ModalForm: FunctionComponent<IModalForm> = ({ showModal }) => {
+const ModalForm: FunctionComponent<IModalForm> = ({
+  showModal,
+  setShowModal,
+}) => {
   const [task, setTask] = useState<string>("");
   const [pomodoroTime, setPomodoroTime] = useState<number>(0);
   const [pomodoroShortResting, setPomodoroShortResting] = useState<number>(0);
@@ -28,6 +31,7 @@ const ModalForm: FunctionComponent<IModalForm> = ({ showModal }) => {
 
     setCamps();
     dispatch(createPomodoroRequest(pomodoroData));
+    setShowModal(false);
   }
 
   function setCamps() {
