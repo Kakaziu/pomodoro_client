@@ -2,6 +2,7 @@ import { Error } from "../protocol";
 
 export interface PomodoroState {
   pomodoros: Pomodoro[];
+  pomodoro: Pomodoro | null;
   error: Error | null;
   loading: boolean;
 }

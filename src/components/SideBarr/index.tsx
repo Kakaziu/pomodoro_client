@@ -4,9 +4,10 @@ import { MdTimeline } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Aside, Container } from "./styled";
 import Logo from "../Logo";
+import { State } from "../../store/protocol";
 
 const SideBarr: FunctionComponent = () => {
-  const { user } = useSelector((state: any) => state.UserReducer);
+  const { user } = useSelector((state: State) => state.UserReducer);
 
   if (!user) return <></>;
 
