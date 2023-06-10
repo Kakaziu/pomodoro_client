@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import { Error } from "../protocol";
 
 export interface PomodoroState {

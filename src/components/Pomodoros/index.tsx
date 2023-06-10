@@ -6,6 +6,7 @@ import { Pomodoro as IPomodoro } from "../../store/modules/pomodoro/protocol";
 import { LoadingTag, Pomodoro, PomodoroInfos, PomodorosTag } from "./styled";
 import { readPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/readActions";
 import { State } from "../../store/protocol";
+import { deletePomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/deleteActions";
 
 const Pomodoros: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -14,9 +15,8 @@ const Pomodoros: FunctionComponent = () => {
 
   useEffect(() => {
     dispatch(readPomodoroRequest());
-
-    if (pomodoros.length > 0) setLoading(false);
-  }, [dispatch, pomodoros.length]);
+    setLoading(false);
+  }, [dispatch]);
 
   return (
     <PomodorosTag>
@@ -33,11 +33,16 @@ const Pomodoros: FunctionComponent = () => {
       ) : (
         pomodoros.map((pomodoro: IPomodoro) => {
           return (
-            <Pomodoro>
+            <Pomodoro key={pomodoro.id}>
               <h3>
                 {pomodoro.title}
                 <div>
-                  <AiFillDelete size="22" color="red" cursor="pointer" />
+                  <AiFillDelete
+                    size="22"
+                    color="red"
+                    cursor="pointer"
+                    onClick={() => dispatch(deletePomodoroRequest(pomodoro.id))}
+                  />
                   <AiFillEdit size="22" color="blue" cursor="pointer" />
                 </div>
               </h3>
