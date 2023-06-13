@@ -60,7 +60,7 @@ export default function PomodoroReducer(state = initialState, action: Action) {
 
     case "UPDATE_POMODORO_SUCCESS":
       return (state = {
-        pomodoros: [...state.pomodoros, action.payload],
+        pomodoros: [...state.pomodoros],
         pomodoro: null,
         error: null,
         loading: false,

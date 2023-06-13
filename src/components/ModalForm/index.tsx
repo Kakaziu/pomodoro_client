@@ -5,6 +5,8 @@ import { createPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActi
 import { IModalForm } from "./protocol";
 import { useSelector } from "react-redux";
 import { State } from "../../store/protocol";
+import { updatePomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/updateActions";
+import { readPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/readActions";
 
 const ModalForm: FunctionComponent<IModalForm> = ({
   showModal,
@@ -42,7 +44,10 @@ const ModalForm: FunctionComponent<IModalForm> = ({
     };
 
     setCamps();
-    dispatch(createPomodoroRequest(pomodoroData));
+
+    if (!pomodoro) dispatch(createPomodoroRequest(pomodoroData));
+    else dispatch(updatePomodoroRequest(pomodoro.id, pomodoroData));
+
     setShowModal(false);
   }
 

@@ -2,11 +2,12 @@ import { Error } from "../../protocol";
 import { Pomodoro, UpdatePomodoroParams } from "../protocol";
 
 export const updatePomodoroRequest = (
+  id: string,
   updatePomodoroParams: UpdatePomodoroParams
 ) => {
   return {
     type: "UPDATE_POMODORO_REQUEST",
-    payload: { id: String, data: updatePomodoroParams },
+    payload: { id: id, data: updatePomodoroParams },
   };
 };
 

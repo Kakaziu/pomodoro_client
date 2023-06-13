@@ -12,9 +12,11 @@ const Modal: FunctionComponent<IModal> = ({
 
   function onHideModal(e: any) {
     const target = e.target;
-    dispatch({ type: "RESET_POMODORO" });
 
-    if (target.id === "modal") setShowModal(false);
+    if (target.id === "modal") {
+      dispatch({ type: "RESET_POMODORO" });
+      setShowModal(false);
+    }
   }
 
   return (

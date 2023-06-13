@@ -13,12 +13,14 @@ import { showPomodoroRequest } from "../../store/modules/pomodoro/pomodoroAction
 const Pomodoros: FunctionComponent<IPomodorosTag> = ({ setShowModal }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const { pomodoros } = useSelector((state: State) => state.PomodoroReducer);
+  const { pomodoros, pomodoro } = useSelector(
+    (state: State) => state.PomodoroReducer
+  );
 
   useEffect(() => {
     dispatch(readPomodoroRequest());
     setLoading(false);
-  }, [dispatch]);
+  }, [pomodoro]);
 
   function openEdit(id: string) {
     dispatch(showPomodoroRequest(id));
