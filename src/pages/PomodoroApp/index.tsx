@@ -1,13 +1,25 @@
+import { Link } from "react-router-dom";
 import Logo from "../../components/Logo";
-import { Header } from "./styled";
+import { Header, PomodoroPage } from "./styled";
+import PomodoroTimer from "../../components/PomodoroTimer";
+import { ThemeProvider } from "styled-components";
+import { useState } from "react";
+import { workingTheme, shortRestingTheme, longRestingTheme } from "../../theme";
 
 const PomodoroApp = () => {
-  return (
-    <Header>
-      <Logo justify_content="left" />
+  const [theme, setTheme] = useState("Working");
 
-      <button>Back to panel</button>
-    </Header>
+  return (
+    <ThemeProvider theme={longRestingTheme}>
+      <PomodoroPage>
+        <Header>
+          <Logo justify_content="left" />
+
+          <Link to="/">Back to panel</Link>
+        </Header>
+        <PomodoroTimer />
+      </PomodoroPage>
+    </ThemeProvider>
   );
 };
 
