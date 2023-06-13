@@ -4,7 +4,10 @@ import { Pomodoro, UpdatePomodoroParams } from "../protocol";
 export const updatePomodoroRequest = (
   updatePomodoroParams: UpdatePomodoroParams
 ) => {
-  return { type: "UPDATE_POMODORO_REQUEST", payload: updatePomodoroParams };
+  return {
+    type: "UPDATE_POMODORO_REQUEST",
+    payload: { id: String, data: updatePomodoroParams },
+  };
 };
 
 export const updatePomodoroSuccess = (pomodoro: Pomodoro) => {

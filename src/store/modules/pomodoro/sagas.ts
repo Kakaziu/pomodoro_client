@@ -18,6 +18,14 @@ import {
   deletePomodoroFailure,
   deletePomodoroSuccess,
 } from "./pomodoroActions/deleteActions";
+import {
+  updatePomodoroFailure,
+  updatePomodoroSuccess,
+} from "./pomodoroActions/updateActions";
+import {
+  showPomodoroFailure,
+  showPomodoroSuccess,
+} from "./pomodoroActions/showActions";
 
 function* getPomodoros(): Generator<CallEffect | PutEffect<Action>> {
   try {
@@ -59,8 +67,39 @@ function* deletePomodoro(
   }
 }
 
+function* updatePomodoro(
+  action: Action
+): Generator<CallEffect | PutEffect<Action>> {
+  try {
+    const response: any = yield call(
+      api.patch,
+      `/pomodoros/${action.payload.id}`,
+      action.payload.data
+    );
+    toast.success("Edited pomodoro.");
+
+    yield put(updatePomodoroSuccess(response.data));
+  } catch (e: any) {
+    yield put(updatePomodoroFailure(e.response.data.message));
+  }
+}
+
+function* showPomodoro(
+  action: Action
+): Generator<CallEffect | PutEffect<Action>> {
+  try {
+    const response: any = yield call(api.get, `/pomodoros/${action.payload}`);
+
+    yield put(showPomodoroSuccess(response.data));
+  } catch (e: any) {
+    yield put(showPomodoroFailure(e.response.data.message));
+  }
+}
+
 export default all([
   takeLatest("CREATE_POMODORO_REQUEST", createPomodoro),
   takeLatest("READ_POMODORO_REQUEST", getPomodoros),
   takeLatest("DELETE_POMODORO_REQUEST", deletePomodoro),
+  takeLatest("UPDATE_POMODORO_REQUEST", updatePomodoro),
+  takeLatest("SHOW_POMODORO_REQUEST", showPomodoro),
 ]);
