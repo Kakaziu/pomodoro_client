@@ -22,7 +22,7 @@ const Pomodoros: FunctionComponent<IPomodorosTag> = ({ setShowModal }) => {
   useEffect(() => {
     dispatch(readPomodoroRequest());
     setLoading(false);
-  }, [pomodoro]);
+  }, [dispatch, pomodoro]);
 
   function openEdit(id: string) {
     dispatch(showPomodoroRequest(id));
