@@ -4,20 +4,21 @@ import { Header, PomodoroPage } from "./styled";
 import PomodoroTimer from "../../components/PomodoroTimer";
 import { ThemeProvider } from "styled-components";
 import { useState } from "react";
-import { workingTheme, shortRestingTheme, longRestingTheme } from "../../theme";
+import { workingTheme } from "../../theme";
+import { Theme } from "./protocol";
 
 const PomodoroApp = () => {
-  const [theme, setTheme] = useState("Working");
+  const [theme, setTheme] = useState<Theme>(workingTheme);
 
   return (
-    <ThemeProvider theme={longRestingTheme}>
+    <ThemeProvider theme={theme}>
       <PomodoroPage>
         <Header>
           <Logo justify_content="left" />
 
           <Link to="/">Back to panel</Link>
         </Header>
-        <PomodoroTimer />
+        <PomodoroTimer setTheme={setTheme} />
       </PomodoroPage>
     </ThemeProvider>
   );

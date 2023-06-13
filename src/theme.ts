@@ -6,12 +6,12 @@ export const workingTheme = {
 
 export const shortRestingTheme = {
   colors: {
-    primary: "#2eb6ff",
+    primary: "#0488d4",
   },
 };
 
 export const longRestingTheme = {
   colors: {
-    primary: "#366ff5",
+    primary: "#5836d9",
   },
 };

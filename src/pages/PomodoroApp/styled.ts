@@ -4,6 +4,7 @@ export const PomodoroPage = styled.section`
   width: 100%;
   height: 100vh;
   background-color: ${(props) => props.theme.colors.primary};
+  transition: 0.3s;
 `;
 
 export const Header = styled.header`
