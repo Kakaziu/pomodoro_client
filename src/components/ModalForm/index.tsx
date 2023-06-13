@@ -20,9 +20,9 @@ const ModalForm: FunctionComponent<IModalForm> = ({
   useEffect(() => {
     if (pomodoro) {
       setTask(pomodoro.title);
-      setPomodoroTime(pomodoro.timeWorking);
-      setPomodoroShortResting(pomodoro.timeShortResting);
-      setPomodoroLongResting(pomodoro.timeLongResting);
+      setPomodoroTime(pomodoro.timeWorking / 60);
+      setPomodoroShortResting(pomodoro.timeShortResting / 60);
+      setPomodoroLongResting(pomodoro.timeLongResting / 60);
     }
   }, [pomodoro]);
 
