@@ -1,3 +1,5 @@
+import { Action } from "../protocol";
+
 export interface UserState {
   user: User | null;
   error: Error | null;
