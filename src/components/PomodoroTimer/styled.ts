@@ -25,3 +25,22 @@ export const PomodoroTimerTag = styled.div`
     }
   }
 `;
+
+export const ActionButton = styled.button`
+  width: 30%;
+  padding: 10px;
+  margin: auto;
+  margin-top: 35px;
+  border: none;
+  border-radius: 4px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 25px;
+  color: ${(props) => props.theme.colors.primary};
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    box-shadow: 0 0 5px white;
+  }
+`;

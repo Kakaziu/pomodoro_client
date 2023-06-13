@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { PomodoroTimerTag } from "./styled";
+import { ActionButton, PomodoroTimerTag } from "./styled";
 import { IPomodoroTime } from "./protocol";
 import { workingTheme, shortRestingTheme, longRestingTheme } from "../../theme";
 import Timer from "../Timer";
@@ -45,6 +45,7 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({ setTheme }) => {
   function pomodoroWorking() {
     if (!pomodoro) return;
 
+    setIsPlaying(false);
     setTheme(workingTheme);
     setMainTime(pomodoro.timeWorking);
   }
@@ -52,6 +53,7 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({ setTheme }) => {
   function shortResting() {
     if (!pomodoro) return;
 
+    setIsPlaying(false);
     setTheme(shortRestingTheme);
     setMainTime(pomodoro.timeShortResting);
   }
@@ -59,6 +61,7 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({ setTheme }) => {
   function longResting() {
     if (!pomodoro) return;
 
+    setIsPlaying(false);
     setTheme(longRestingTheme);
     setMainTime(pomodoro.timeLongResting);
   }
@@ -71,6 +74,9 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({ setTheme }) => {
         <button onClick={longResting}>Long Resting</button>
       </div>
       <Timer mainTime={mainTime} />
+      <ActionButton onClick={() => setIsPlaying(!isPlaying)}>
+        {isPlaying ? "PAUSE" : "START"}
+      </ActionButton>
     </PomodoroTimerTag>
   );
 };
