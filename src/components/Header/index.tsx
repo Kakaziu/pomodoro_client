@@ -42,7 +42,7 @@ const Header: FunctionComponent<IHeader> = ({ setShowModal }) => {
       ) : (
         <ContainerNoUser>
           <div>
-            <Logo />
+            <Logo justify_content="center" />
           </div>
 
           <Link to="/login">Login</Link>

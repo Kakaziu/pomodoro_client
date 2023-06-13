@@ -1,9 +1,10 @@
 import { FunctionComponent } from "react";
 import { LogoTag } from "./styled";
+import { ILogoTag } from "./protocol";
 
-const Logo: FunctionComponent = () => {
+const Logo: FunctionComponent<ILogoTag> = ({ justify_content }) => {
   return (
-    <LogoTag>
+    <LogoTag justify_content={justify_content}>
       <span>UPomodoro</span>
       <lord-icon
         src="https://cdn.lordicon.com/qmuwmmnl.json"
