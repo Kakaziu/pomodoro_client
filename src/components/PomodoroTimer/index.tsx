@@ -10,7 +10,6 @@ import { useInterval } from "usehooks-ts";
 
 const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({ setTheme }) => {
   const [pomodoro, setPomodoro] = useState<Pomodoro | null>(null);
-  const [loading, setLoading] = useState(true);
   const [mainTime, setMainTime] = useState(1500);
   const [isPlaying, setIsPlaying] = useState(false);
   const params = useParams();
@@ -25,7 +24,6 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({ setTheme }) => {
         if (response.status === 200) {
           setPomodoro(response.data);
           setMainTime(response.data.timeWorking);
-          setLoading(false);
         }
       } catch (e) {
         console.log(e);
@@ -44,14 +42,33 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({ setTheme }) => {
     isPlaying ? 1000 : null
   );
 
+  function pomodoroWorking() {
+    if (!pomodoro) return;
+
+    setTheme(workingTheme);
+    setMainTime(pomodoro.timeWorking);
+  }
+
+  function shortResting() {
+    if (!pomodoro) return;
+
+    setTheme(shortRestingTheme);
+    setMainTime(pomodoro.timeShortResting);
+  }
+
+  function longResting() {
+    if (!pomodoro) return;
+
+    setTheme(longRestingTheme);
+    setMainTime(pomodoro.timeLongResting);
+  }
+
   return (
     <PomodoroTimerTag>
       <div>
-        <button>Pomodoro</button>
-        <button onClick={() => setTheme(shortRestingTheme)}>
-          Short resting
-        </button>
-        <button onClick={() => setTheme(longRestingTheme)}>Long Resting</button>
+        <button onClick={pomodoroWorking}>Pomodoro</button>
+        <button onClick={shortResting}>Short resting</button>
+        <button onClick={longResting}>Long Resting</button>
       </div>
       <Timer mainTime={mainTime} />
     </PomodoroTimerTag>
