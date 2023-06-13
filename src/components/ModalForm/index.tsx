@@ -99,7 +99,7 @@ const ModalForm: FunctionComponent<IModalForm> = ({
         </TimeCamps>
       </Camps>
 
-      <button>CREATE POMODORO</button>
+      <button>{pomodoro ? "EDIT POMODORO" : "CREATE POMODORO"}</button>
     </Form>
   );
 };
