@@ -9,6 +9,8 @@ import { deletePomodoroRequest } from "../../store/modules/pomodoro/pomodoroActi
 import { State } from "../../store/protocol";
 import { IPomodorosTag } from "./protocol";
 import { showPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/showActions";
+import { secondsToMinutes } from "../../utils/secondsToMinutes";
+import { secondsToTime } from "../../utils/secondsToTime";
 
 const Pomodoros: FunctionComponent<IPomodorosTag> = ({ setShowModal }) => {
   const dispatch = useDispatch();
@@ -65,17 +67,29 @@ const Pomodoros: FunctionComponent<IPomodorosTag> = ({ setShowModal }) => {
               <PomodoroInfos>
                 <div>
                   <span>Pomodoro Time</span>
-                  <span className="tp">{pomodoro.timeWorking}</span>
+                  <span className="tp">
+                    {pomodoro.timeWorking >= 3600
+                      ? secondsToTime(pomodoro.timeWorking)
+                      : secondsToMinutes(pomodoro.timeWorking)}
+                  </span>
                 </div>
 
                 <div>
                   <span>Short Resting</span>
-                  <span className="ts">{pomodoro.timeShortResting}</span>
+                  <span className="ts">
+                    {pomodoro.timeShortResting >= 3600
+                      ? secondsToTime(pomodoro.timeShortResting)
+                      : secondsToMinutes(pomodoro.timeShortResting)}
+                  </span>
                 </div>
 
                 <div>
                   <span>Long Resting</span>
-                  <span className="tl">{pomodoro.timeLongResting}</span>
+                  <span className="tl">
+                    {pomodoro.timeLongResting >= 3600
+                      ? secondsToTime(pomodoro.timeLongResting)
+                      : secondsToMinutes(pomodoro.timeLongResting)}
+                  </span>
                 </div>
 
                 <div>
