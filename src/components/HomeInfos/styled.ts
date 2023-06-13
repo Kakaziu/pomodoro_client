@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { IHomeInfos } from "./protocol";
+import { IHomeInfosTag } from "./protocol";
 
-export const HomeInfosTag = styled.div<IHomeInfos>`
+export const HomeInfosTag = styled.div<IHomeInfosTag>`
   float: right;
   width: ${(props) => (props.user ? "75%" : "100%")};
 `;

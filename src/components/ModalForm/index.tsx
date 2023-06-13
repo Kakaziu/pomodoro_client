@@ -3,15 +3,27 @@ import { FormEvent, FunctionComponent, useEffect, useState } from "react";
 import { Camp, Camps, Form, TimeCamp, TimeCamps } from "./styled";
 import { createPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/createActions";
 import { IModalForm } from "./protocol";
+import { useSelector } from "react-redux";
+import { State } from "../../store/protocol";
 
 const ModalForm: FunctionComponent<IModalForm> = ({
   showModal,
   setShowModal,
 }) => {
+  const { pomodoro } = useSelector((state: State) => state.PomodoroReducer);
   const [task, setTask] = useState<string>("");
   const [pomodoroTime, setPomodoroTime] = useState<number>(0);
   const [pomodoroShortResting, setPomodoroShortResting] = useState<number>(0);
   const [pomodoroLongResting, setPomodoroLongResting] = useState<number>(0);
+
+  useEffect(() => {
+    if (pomodoro) {
+      setTask(pomodoro.title);
+      setPomodoroTime(pomodoro.timeWorking);
+      setPomodoroShortResting(pomodoro.timeShortResting);
+      setPomodoroLongResting(pomodoro.timeLongResting);
+    }
+  }, [pomodoro]);
 
   useEffect(() => {
     if (!showModal) setCamps();

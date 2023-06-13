@@ -12,7 +12,7 @@ const Home = () => {
     <section id="home">
       <Header setShowModal={setShowModal} />
       <SideBarr />
-      <HomeInfos />
+      <HomeInfos setShowModal={setShowModal} />
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <ModalForm showModal={showModal} setShowModal={setShowModal} />
       </Modal>

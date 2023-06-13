@@ -3,8 +3,9 @@ import { ContentNoUser, HomeInfosTag, TitlePag } from "./styled";
 import Pomodoros from "../Pomodoros";
 import { useSelector } from "react-redux";
 import { State } from "../../store/protocol";
+import { IHomeInfos } from "./protocol";
 
-const HomeInfos: FunctionComponent = () => {
+const HomeInfos: FunctionComponent<IHomeInfos> = ({ setShowModal }) => {
   const { user } = useSelector((state: State) => state.UserReducer);
 
   return (
@@ -17,7 +18,7 @@ const HomeInfos: FunctionComponent = () => {
       </TitlePag>
 
       {user ? (
-        <Pomodoros />
+        <Pomodoros setShowModal={setShowModal} />
       ) : (
         <ContentNoUser>
           <lord-icon

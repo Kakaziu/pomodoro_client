@@ -61,7 +61,7 @@ export default function PomodoroReducer(state = initialState, action: Action) {
     case "UPDATE_POMODORO_SUCCESS":
       return (state = {
         pomodoros: [...state.pomodoros, action.payload],
-        pomodoro: state.pomodoro,
+        pomodoro: null,
         error: null,
         loading: false,
       });
@@ -69,7 +69,7 @@ export default function PomodoroReducer(state = initialState, action: Action) {
     case "UPDATE_POMODORO_FAILURE":
       return (state = {
         pomodoros: [...state.pomodoros],
-        pomodoro: state.pomodoro,
+        pomodoro: null,
         error: action.payload,
         loading: false,
       });
@@ -120,6 +120,13 @@ export default function PomodoroReducer(state = initialState, action: Action) {
         pomodoros: [...state.pomodoros],
         pomodoro: state.pomodoro,
         error: action.payload,
+        loading: false,
+      });
+    case "RESET_POMODORO":
+      return (state = {
+        pomodoros: [...state.pomodoros],
+        pomodoro: null,
+        error: null,
         loading: false,
       });
     default:

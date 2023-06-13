@@ -5,10 +5,12 @@ import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { Pomodoro as IPomodoro } from "../../store/modules/pomodoro/protocol";
 import { LoadingTag, Pomodoro, PomodoroInfos, PomodorosTag } from "./styled";
 import { readPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/readActions";
-import { State } from "../../store/protocol";
 import { deletePomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/deleteActions";
+import { State } from "../../store/protocol";
+import { IPomodorosTag } from "./protocol";
+import { showPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/showActions";
 
-const Pomodoros: FunctionComponent = () => {
+const Pomodoros: FunctionComponent<IPomodorosTag> = ({ setShowModal }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const { pomodoros } = useSelector((state: State) => state.PomodoroReducer);
@@ -17,6 +19,11 @@ const Pomodoros: FunctionComponent = () => {
     dispatch(readPomodoroRequest());
     setLoading(false);
   }, [dispatch]);
+
+  function openEdit(id: string) {
+    dispatch(showPomodoroRequest(id));
+    setShowModal(true);
+  }
 
   return (
     <PomodorosTag>
@@ -43,7 +50,12 @@ const Pomodoros: FunctionComponent = () => {
                     cursor="pointer"
                     onClick={() => dispatch(deletePomodoroRequest(pomodoro.id))}
                   />
-                  <AiFillEdit size="22" color="blue" cursor="pointer" />
+                  <AiFillEdit
+                    size="22"
+                    color="blue"
+                    cursor="pointer"
+                    onClick={() => openEdit(pomodoro.id)}
+                  />
                 </div>
               </h3>
               <span>00:00:00</span>
