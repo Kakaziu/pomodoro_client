@@ -35,6 +35,7 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
           setPomodoro(response.data);
           setMainTime(response.data.timeWorking);
           setTotalPomodoroCompleted(response.data.totalPomodoroCompleted);
+          setTotalPomodoroTime(response.data.totalTimePomodoro);
         }
       } catch (e) {
         console.log(e);
@@ -64,9 +65,6 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
     },
     isPlaying ? 1000 : null
   );
-
-  console.log(totalPomodoroCompleted);
-  console.log(totalPomodoroTime);
 
   function pomodoroWorking() {
     if (!pomodoro) return;

@@ -60,7 +60,7 @@ const Pomodoros: FunctionComponent<IPomodorosTag> = ({ setShowModal }) => {
             <Pomodoro key={pomodoro.id}>
               <Link to={`/pomodoro/${pomodoro.id}`}>
                 <h3>{pomodoro.title}</h3>
-                <span>00:00:00</span>
+                <span>{secondsToTime(pomodoro.totalTimePomodoro)}</span>
 
                 <PomodoroInfos>
                   <div>
