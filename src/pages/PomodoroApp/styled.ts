@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PomodoroPage = styled.section`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: ${(props) => props.theme.colors.primary};
   transition: 0.3s;
 `;

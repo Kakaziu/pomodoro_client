@@ -7,11 +7,13 @@ import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import { Pomodoro } from "../../store/modules/pomodoro/protocol";
 import { useInterval } from "usehooks-ts";
+import LofiVideo from "../LofiVideo";
 
 const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({ setTheme }) => {
   const [pomodoro, setPomodoro] = useState<Pomodoro | null>(null);
   const [mainTime, setMainTime] = useState(1500);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [player, setPlayer] = useState(0);
   const params = useParams();
 
   useEffect(() => {
@@ -74,9 +76,16 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({ setTheme }) => {
         <button onClick={longResting}>Long Resting</button>
       </div>
       <Timer mainTime={mainTime} />
-      <ActionButton onClick={() => setIsPlaying(!isPlaying)}>
+      <ActionButton
+        onClick={() => {
+          setIsPlaying(!isPlaying);
+          setPlayer(1);
+        }}
+      >
         {isPlaying ? "PAUSE" : "START"}
       </ActionButton>
+
+      <LofiVideo player={player} />
     </PomodoroTimerTag>
   );
 };
