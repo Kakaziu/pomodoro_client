@@ -10,6 +10,8 @@ export const TitlePag = styled.div`
   text-align: center;
   padding: 20px;
   background-color: #ccc;
+  position: relative;
+  z-index: 9998;
 
   h1 {
     color: #121331;

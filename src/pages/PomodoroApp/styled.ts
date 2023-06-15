@@ -22,7 +22,7 @@ export const Header = styled.header`
     background-color: yellow;
   }
 
-  a {
+  button {
     width: 25%;
     padding: 8px 0px;
     font-size: 17px;
@@ -34,8 +34,6 @@ export const Header = styled.header`
     font-weight: lighter;
     cursor: pointer;
     transition: 0.3s;
-    text-decoration: none;
-    text-align: center;
 
     &:hover {
       box-shadow: 0 0 10px;

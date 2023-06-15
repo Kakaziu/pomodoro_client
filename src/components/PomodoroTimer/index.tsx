@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { ActionButton, PomodoroTimerTag } from "./styled";
-import { IPomodoroTime } from "./protocol";
+import { IPomodoroTime, ModePomodoro } from "./protocol";
 import { workingTheme, shortRestingTheme, longRestingTheme } from "../../theme";
 import Timer from "../Timer";
 import { useParams } from "react-router-dom";
@@ -8,12 +8,19 @@ import api from "../../services/api";
 import { Pomodoro } from "../../store/modules/pomodoro/protocol";
 import { useInterval } from "usehooks-ts";
 import LofiVideo from "../LofiVideo";
+import { useDispatch } from "react-redux";
 
-const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({ setTheme }) => {
+const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
+  setTheme,
+  totalPomodoroCompleted,
+  setTotalPomodoroCompleted,
+}) => {
   const [pomodoro, setPomodoro] = useState<Pomodoro | null>(null);
   const [mainTime, setMainTime] = useState(1500);
+  const [modePomodoro, setModePomodoro] = useState<ModePomodoro>("Working");
   const [isPlaying, setIsPlaying] = useState(false);
   const [player, setPlayer] = useState(0);
+
   const params = useParams();
 
   useEffect(() => {
@@ -26,6 +33,7 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({ setTheme }) => {
         if (response.status === 200) {
           setPomodoro(response.data);
           setMainTime(response.data.timeWorking);
+          setTotalPomodoroCompleted(response.data.totalPomodoroCompleted);
         }
       } catch (e) {
         console.log(e);
@@ -34,6 +42,11 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({ setTheme }) => {
 
     getPomodoro();
   }, []);
+
+  useEffect(() => {
+    if (mainTime === 0 && modePomodoro === "Working")
+      setTotalPomodoroCompleted(totalPomodoroCompleted + 1);
+  }, [mainTime, modePomodoro]);
 
   useInterval(
     () => {

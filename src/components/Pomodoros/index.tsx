@@ -3,7 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactLoading from "react-loading";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { Pomodoro as IPomodoro } from "../../store/modules/pomodoro/protocol";
-import { LoadingTag, Pomodoro, PomodoroInfos, PomodorosTag } from "./styled";
+import {
+  ActionBtns,
+  LoadingTag,
+  Pomodoro,
+  PomodoroInfos,
+  PomodorosTag,
+} from "./styled";
 import { readPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/readActions";
 import { deletePomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/deleteActions";
 import { State } from "../../store/protocol";
@@ -45,30 +51,9 @@ const Pomodoros: FunctionComponent<IPomodorosTag> = ({ setShowModal }) => {
       ) : (
         pomodoros.map((pomodoro: IPomodoro) => {
           return (
-            <Link
-              to={`/pomodoro/${pomodoro.id}`}
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <Pomodoro key={pomodoro.id}>
-                <h3>
-                  {pomodoro.title}
-                  <div>
-                    <AiFillDelete
-                      size="22"
-                      color="red"
-                      cursor="pointer"
-                      onClick={() =>
-                        dispatch(deletePomodoroRequest(pomodoro.id))
-                      }
-                    />
-                    <AiFillEdit
-                      size="22"
-                      color="blue"
-                      cursor="pointer"
-                      onClick={() => openEdit(pomodoro.id)}
-                    />
-                  </div>
-                </h3>
+            <Pomodoro key={pomodoro.id}>
+              <Link to={`/pomodoro/${pomodoro.id}`}>
+                <h3>{pomodoro.title}</h3>
                 <span>00:00:00</span>
 
                 <PomodoroInfos>
@@ -106,8 +91,22 @@ const Pomodoros: FunctionComponent<IPomodorosTag> = ({ setShowModal }) => {
                     </span>
                   </div>
                 </PomodoroInfos>
-              </Pomodoro>
-            </Link>
+              </Link>
+              <ActionBtns>
+                <AiFillDelete
+                  size="22"
+                  color="red"
+                  cursor="pointer"
+                  onClick={() => dispatch(deletePomodoroRequest(pomodoro.id))}
+                />
+                <AiFillEdit
+                  size="22"
+                  color="blue"
+                  cursor="pointer"
+                  onClick={() => openEdit(pomodoro.id)}
+                />
+              </ActionBtns>
+            </Pomodoro>
           );
         })
       )}

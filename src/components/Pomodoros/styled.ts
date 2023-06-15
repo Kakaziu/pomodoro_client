@@ -31,23 +31,25 @@ export const Pomodoro = styled.div`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  position: relative;
+
+  a {
+    text-decoration: none;
+    color: black;
+    position: relative;
+    z-index: 9997;
+  }
 
   h3 {
-    font-size: 23px;
+    font-size: 28px;
     display: flex;
     justify-content: space-between;
     width: 95%;
     margin: auto;
-
-    div {
-      width: 60px;
-      display: flex;
-      justify-content: space-between;
-    }
   }
 
   span {
-    font-size: 35px;
+    font-size: 40px;
     font-weight: bold;
     display: block;
     margin-top: 15px;
@@ -91,6 +93,16 @@ export const PomodoroInfos = styled.div`
     font-size: 15px;
     margin-top: 5px;
   }
+`;
+
+export const ActionBtns = styled.div`
+  width: 60px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 9998;
+  top: 20px;
+  right: 20px;
 `;
 
 export const LoadingTag = styled.h2`

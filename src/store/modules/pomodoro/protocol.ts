@@ -26,4 +26,7 @@ export interface PomodoroParams {
   timeLongResting: number;
 }
 
-export type UpdatePomodoroParams = Partial<PomodoroParams>;
+export type UpdatePomodoroParams = Partial<PomodoroParams> & {
+  totalPomodoroCompleted?: number;
+  totalTimePomodoro?: number;
+};
