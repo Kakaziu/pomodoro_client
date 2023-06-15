@@ -16,6 +16,7 @@ const PomodoroApp = () => {
 
   const [theme, setTheme] = useState<Theme>(workingTheme);
   const [totalPomodoroCompleted, setTotalPomodoroCompleted] = useState(0);
+  const [totalPomodoroTime, setTotalPomodoroTime] = useState(0);
 
   function goHome() {
     const { id } = params;
@@ -25,6 +26,7 @@ const PomodoroApp = () => {
     dispatch(
       updatePomodoroRequest(id, {
         totalPomodoroCompleted: totalPomodoroCompleted,
+        totalTimePomodoro: totalPomodoroTime,
       })
     );
     navigate("/");
@@ -41,7 +43,9 @@ const PomodoroApp = () => {
         <PomodoroTimer
           setTheme={setTheme}
           totalPomodoroCompleted={totalPomodoroCompleted}
+          totalPomodoroTime={totalPomodoroTime}
           setTotalPomodoroCompleted={setTotalPomodoroCompleted}
+          setTotalPomodoroTime={setTotalPomodoroTime}
         />
       </PomodoroPage>
     </ThemeProvider>

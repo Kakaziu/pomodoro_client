@@ -38,9 +38,9 @@ const ModalForm: FunctionComponent<IModalForm> = ({
 
     const pomodoroData = {
       title: task,
-      timeWorking: pomodoroTime * 60,
-      timeShortResting: pomodoroShortResting * 60,
-      timeLongResting: pomodoroLongResting * 60,
+      timeWorking: pomodoroTime,
+      timeShortResting: pomodoroShortResting,
+      timeLongResting: pomodoroLongResting,
     };
 
     setCamps();

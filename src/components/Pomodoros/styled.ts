@@ -23,7 +23,7 @@ export const Pomodoro = styled.div`
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0.5);
-  width: 460px;
+  width: 455px;
   height: 220px;
   text-align: center;
   display: flex;
