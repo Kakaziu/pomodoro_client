@@ -42,7 +42,6 @@ function* createPomodoro(
 ): Generator<CallEffect | PutEffect<Action>> {
   try {
     const response: any = yield call(api.post, "/pomodoros", action.payload);
-    toast.success("Pomodoro created.");
 
     yield put(createPomodoroSuccess(response.data));
   } catch (e: any) {
@@ -59,7 +58,6 @@ function* deletePomodoro(
       api.delete,
       `/pomodoros/${action.payload}`
     );
-    toast.success("Pomodoro deleted.");
 
     yield put(deletePomodoroSuccess(response.data));
   } catch (e: any) {
@@ -76,7 +74,6 @@ function* updatePomodoro(
       `/pomodoros/${action.payload.id}`,
       action.payload.data
     );
-    toast.success("Edited pomodoro.");
 
     yield put(updatePomodoroSuccess(response.data));
   } catch (e: any) {

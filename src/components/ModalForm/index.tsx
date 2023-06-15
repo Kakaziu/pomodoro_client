@@ -6,6 +6,7 @@ import { IModalForm } from "./protocol";
 import { useSelector } from "react-redux";
 import { State } from "../../store/protocol";
 import { updatePomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/updateActions";
+import { toast } from "react-toastify";
 
 const ModalForm: FunctionComponent<IModalForm> = ({
   showModal,
@@ -44,8 +45,13 @@ const ModalForm: FunctionComponent<IModalForm> = ({
 
     setCamps();
 
-    if (!pomodoro) dispatch(createPomodoroRequest(pomodoroData));
-    else dispatch(updatePomodoroRequest(pomodoro.id, pomodoroData));
+    if (!pomodoro) {
+      dispatch(createPomodoroRequest(pomodoroData));
+      toast.success("Pomodoro created.");
+    } else {
+      dispatch(updatePomodoroRequest(pomodoro.id, pomodoroData));
+      if (pomodoro) toast.success("Edited pomodoro");
+    }
 
     setShowModal(false);
   }

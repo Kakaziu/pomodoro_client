@@ -18,6 +18,7 @@ import { showPomodoroRequest } from "../../store/modules/pomodoro/pomodoroAction
 import { secondsToMinutes } from "../../utils/secondsToMinutes";
 import { secondsToTime } from "../../utils/secondsToTime";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Pomodoros: FunctionComponent<IPomodorosTag> = ({ setShowModal }) => {
   const dispatch = useDispatch();
@@ -34,6 +35,11 @@ const Pomodoros: FunctionComponent<IPomodorosTag> = ({ setShowModal }) => {
   function openEdit(id: string) {
     dispatch(showPomodoroRequest(id));
     setShowModal(true);
+  }
+
+  function deletePomodoro(id: string) {
+    dispatch(deletePomodoroRequest(id));
+    toast.success("Pomodoro deleted.");
   }
 
   return (
@@ -97,7 +103,7 @@ const Pomodoros: FunctionComponent<IPomodorosTag> = ({ setShowModal }) => {
                   size="22"
                   color="red"
                   cursor="pointer"
-                  onClick={() => dispatch(deletePomodoroRequest(pomodoro.id))}
+                  onClick={() => deletePomodoro(pomodoro.id)}
                 />
                 <AiFillEdit
                   size="22"
