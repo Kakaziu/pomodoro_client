@@ -8,6 +8,7 @@ import api from "../../services/api";
 import { Pomodoro } from "../../store/modules/pomodoro/protocol";
 import { useInterval } from "usehooks-ts";
 import LofiVideo from "../LofiVideo";
+import { Theme } from "../../pages/PomodoroApp/protocol";
 
 const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   setTheme,
@@ -46,16 +47,32 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   }, []);
 
   useEffect(() => {
-    const modePomodoroTime = getTimeModePomodoro();
+    if (!pomodoro) return;
 
-    if (!modePomodoroTime) return;
-
-    if (mainTime === 0)
-      setTotalPomodoroTime(totalPomodoroTime + modePomodoroTime);
-
-    if (mainTime === 0 && modePomodoro === "Working")
-      setTotalPomodoroCompleted(totalPomodoroCompleted + 1);
-  }, [mainTime, modePomodoro]);
+    if (mainTime === 0 && modePomodoro === "Working") {
+      autoChangeMode(
+        "Short Resting",
+        shortRestingTheme,
+        pomodoro.timeShortResting,
+        pomodoro.timeWorking,
+        true
+      );
+    } else if (mainTime === 0 && modePomodoro === "Short Resting") {
+      autoChangeMode(
+        "Long Resting",
+        longRestingTheme,
+        pomodoro.timeLongResting,
+        pomodoro.timeShortResting
+      );
+    } else if (mainTime === 0 && modePomodoro === "Long Resting") {
+      autoChangeMode(
+        "Working",
+        workingTheme,
+        pomodoro.timeWorking,
+        pomodoro.timeLongResting
+      );
+    }
+  }, [mainTime, modePomodoro, autoChangeMode]);
 
   useInterval(
     () => {
@@ -93,26 +110,19 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
     setMainTime(pomodoro.timeLongResting);
   }
 
-  function getTimeModePomodoro() {
-    if (!pomodoro) return;
-
-    let refMainTime;
-
-    switch (modePomodoro) {
-      case "Working":
-        refMainTime = pomodoro.timeWorking;
-        break;
-      case "Short Resting":
-        refMainTime = pomodoro.timeShortResting;
-        break;
-      case "Long Resting":
-        refMainTime = pomodoro.timeLongResting;
-        break;
-      default:
-        refMainTime = pomodoro.timeWorking;
-    }
-
-    return refMainTime;
+  function autoChangeMode(
+    modePomodoro: ModePomodoro,
+    theme: Theme,
+    mainTime: number,
+    actualMainTime: number,
+    addPomodoroCompleted?: boolean
+  ) {
+    setModePomodoro(modePomodoro);
+    setTheme(theme);
+    setMainTime(mainTime);
+    setTotalPomodoroTime(totalPomodoroTime + actualMainTime);
+    if (addPomodoroCompleted)
+      setTotalPomodoroCompleted(totalPomodoroCompleted + 1);
   }
 
   return (
