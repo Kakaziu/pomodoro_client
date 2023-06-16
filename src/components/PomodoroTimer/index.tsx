@@ -61,13 +61,10 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
         setTotalPomodoroTime(totalPomodoroTime + pomodoro.timeWorking);
         shortResting(true);
       } else {
-        setTotalPomodoroTime(totalPomodoroTime + pomodoro.timeShortResting);
         pomodoroWorking(true);
       }
     }
   }, [mainTime, modePomodoro, changeMode]);
-
-  console.log(totalPomodoroTime);
 
   useInterval(
     () => {
