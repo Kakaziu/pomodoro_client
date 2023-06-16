@@ -9,4 +9,4 @@ export interface IPomodoroTime {
   setTotalPomodoroTime: Dispatch<SetStateAction<number>>;
 }
 
-export type ModePomodoro = "Working" | "Short Resting" | "Long Resting";
+export type ModePomodoro = "Working" | "Resting";

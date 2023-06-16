@@ -20,7 +20,6 @@ const PomodoroApp = () => {
 
   function goHome() {
     const { id } = params;
-    console.log(totalPomodoroTime);
 
     if (!id) return;
 

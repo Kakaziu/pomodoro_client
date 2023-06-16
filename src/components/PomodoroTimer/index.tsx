@@ -19,6 +19,7 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
 }) => {
   const [pomodoro, setPomodoro] = useState<Pomodoro | null>(null);
   const [mainTime, setMainTime] = useState(1500);
+  const [timeBlocks, setTimeBlocks] = useState(0);
   const [modePomodoro, setModePomodoro] = useState<ModePomodoro>("Working");
   const [isPlaying, setIsPlaying] = useState(false);
   const [player, setPlayer] = useState(0);
@@ -47,32 +48,26 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   }, []);
 
   useEffect(() => {
+    if (timeBlocks % 4 === 0 && timeBlocks > 0) longResting(true);
+  }, [timeBlocks]);
+
+  useEffect(() => {
     if (!pomodoro) return;
 
-    if (mainTime === 0 && modePomodoro === "Working") {
-      autoChangeMode(
-        "Short Resting",
-        shortRestingTheme,
-        pomodoro.timeShortResting,
-        pomodoro.timeWorking,
-        true
-      );
-    } else if (mainTime === 0 && modePomodoro === "Short Resting") {
-      autoChangeMode(
-        "Long Resting",
-        longRestingTheme,
-        pomodoro.timeLongResting,
-        pomodoro.timeShortResting
-      );
-    } else if (mainTime === 0 && modePomodoro === "Long Resting") {
-      autoChangeMode(
-        "Working",
-        workingTheme,
-        pomodoro.timeWorking,
-        pomodoro.timeLongResting
-      );
+    if (mainTime === 0) {
+      if (modePomodoro === "Working") {
+        setTimeBlocks(timeBlocks + 1);
+        setTotalPomodoroCompleted(totalPomodoroCompleted + 1);
+        setTotalPomodoroTime(totalPomodoroTime + pomodoro.timeWorking);
+        shortResting(true);
+      } else {
+        setTotalPomodoroTime(totalPomodoroTime + pomodoro.timeShortResting);
+        pomodoroWorking(true);
+      }
     }
-  }, [mainTime, modePomodoro, autoChangeMode]);
+  }, [mainTime, modePomodoro, changeMode]);
+
+  console.log(totalPomodoroTime);
 
   useInterval(
     () => {
@@ -83,54 +78,49 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
     isPlaying ? 1000 : null
   );
 
-  function pomodoroWorking() {
+  function pomodoroWorking(autoPlay: boolean) {
     if (!pomodoro) return;
 
-    setModePomodoro("Working");
-    setIsPlaying(false);
-    setTheme(workingTheme);
-    setMainTime(pomodoro.timeWorking);
+    changeMode("Working", workingTheme, pomodoro.timeWorking, autoPlay);
   }
 
-  function shortResting() {
+  function shortResting(autoPlay: boolean) {
     if (!pomodoro) return;
 
-    setModePomodoro("Short Resting");
-    setIsPlaying(false);
-    setTheme(shortRestingTheme);
-    setMainTime(pomodoro.timeShortResting);
+    changeMode(
+      "Resting",
+      shortRestingTheme,
+      pomodoro.timeShortResting,
+      autoPlay
+    );
   }
 
-  function longResting() {
+  function longResting(autoplay: boolean) {
     if (!pomodoro) return;
 
-    setModePomodoro("Long Resting");
-    setIsPlaying(false);
-    setTheme(longRestingTheme);
-    setMainTime(pomodoro.timeLongResting);
+    changeMode("Resting", longRestingTheme, pomodoro.timeLongResting, autoplay);
   }
 
-  function autoChangeMode(
+  function changeMode(
     modePomodoro: ModePomodoro,
     theme: Theme,
     mainTime: number,
-    actualMainTime: number,
-    addPomodoroCompleted?: boolean
+    autoPlay: boolean
   ) {
     setModePomodoro(modePomodoro);
     setTheme(theme);
     setMainTime(mainTime);
-    setTotalPomodoroTime(totalPomodoroTime + actualMainTime);
-    if (addPomodoroCompleted)
-      setTotalPomodoroCompleted(totalPomodoroCompleted + 1);
+
+    if (autoPlay) {
+      setIsPlaying(true);
+    } else setIsPlaying(false);
   }
 
   return (
     <PomodoroTimerTag>
       <div>
-        <button onClick={pomodoroWorking}>Pomodoro</button>
-        <button onClick={shortResting}>Short resting</button>
-        <button onClick={longResting}>Long Resting</button>
+        <button onClick={() => pomodoroWorking(false)}>Pomodoro</button>
+        <button onClick={() => shortResting(false)}>Short resting</button>
       </div>
       <Timer mainTime={mainTime} />
       <ActionButton
@@ -143,6 +133,7 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
       </ActionButton>
 
       <LofiVideo player={player} />
+      <p>{timeBlocks}</p>
     </PomodoroTimerTag>
   );
 };
