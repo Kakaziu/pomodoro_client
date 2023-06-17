@@ -9,6 +9,8 @@ import { Pomodoro } from "../../store/modules/pomodoro/protocol";
 import { useInterval } from "usehooks-ts";
 import LofiVideo from "../LofiVideo";
 import { Theme } from "../../pages/PomodoroApp/protocol";
+import PomodoroDetails from "../PomodoroDetails";
+import { secondsToTime } from "../../utils/secondsToTime";
 
 const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   setTheme,
@@ -19,6 +21,8 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
 }) => {
   const [pomodoro, setPomodoro] = useState<Pomodoro | null>(null);
   const [mainTime, setMainTime] = useState(1500);
+  const [cycles, setCycles] = useState(0);
+  const [instanceTotalTime, setInstanceTotalTime] = useState(0);
   const [timeBlocks, setTimeBlocks] = useState(0);
   const [modePomodoro, setModePomodoro] = useState<ModePomodoro>("Working");
   const [isPlaying, setIsPlaying] = useState(false);
@@ -48,7 +52,10 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   }, []);
 
   useEffect(() => {
-    if (timeBlocks % 4 === 0 && timeBlocks > 0) longResting(true);
+    if (timeBlocks % 4 === 0 && timeBlocks > 0) {
+      setCycles(cycles + 1);
+      longResting(true);
+    }
   }, [timeBlocks]);
 
   useEffect(() => {
@@ -68,9 +75,9 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
 
   useInterval(
     () => {
-      if (mainTime) {
-        setMainTime(mainTime - 1);
-      }
+      if (mainTime) setMainTime(mainTime - 1);
+      if (modePomodoro === "Working")
+        setInstanceTotalTime(instanceTotalTime + 1);
     },
     isPlaying ? 1000 : null
   );
@@ -130,7 +137,11 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
       </ActionButton>
 
       <LofiVideo player={player} />
-      <p>{timeBlocks}</p>
+      <PomodoroDetails
+        pomodoroCompleted={timeBlocks}
+        totalTimeWorking={secondsToTime(instanceTotalTime)}
+        cycles={cycles}
+      />
     </PomodoroTimerTag>
   );
 };
