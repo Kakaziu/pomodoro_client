@@ -40,6 +40,8 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
 
     if (!id) return changeMode("Working", workingTheme, 1500, false);
 
+    console.log("oi");
+
     try {
       const response = await api.get(`/pomodoros/${id}`);
 
