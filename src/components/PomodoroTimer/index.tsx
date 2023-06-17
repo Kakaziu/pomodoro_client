@@ -11,6 +11,7 @@ import LofiVideo from "../LofiVideo";
 import { Theme } from "../../pages/PomodoroApp/protocol";
 import PomodoroDetails from "../PomodoroDetails";
 import { secondsToTime } from "../../utils/secondsToTime";
+import { toast } from "react-toastify";
 
 const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   setTheme,
@@ -31,25 +32,25 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   const params = useParams();
 
   useEffect(() => {
-    async function getPomodoro() {
-      const { id } = params;
-
-      try {
-        const response = await api.get(`/pomodoros/${id}`);
-
-        if (response.status === 200) {
-          setPomodoro(response.data);
-          setMainTime(response.data.timeWorking);
-          setTotalPomodoroCompleted(response.data.totalPomodoroCompleted);
-          setTotalPomodoroTime(response.data.totalTimePomodoro);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
     getPomodoro();
   }, []);
+
+  async function getPomodoro() {
+    const { id } = params;
+
+    try {
+      const response = await api.get(`/pomodoros/${id}`);
+
+      if (response.status === 200) {
+        setPomodoro(response.data);
+        setMainTime(response.data.timeWorking);
+        setTotalPomodoroCompleted(response.data.totalPomodoroCompleted);
+        setTotalPomodoroTime(response.data.totalTimePomodoro);
+      }
+    } catch (e) {
+      return null;
+    }
+  }
 
   useEffect(() => {
     if (timeBlocks % 4 === 0 && timeBlocks > 0) {
