@@ -11,9 +11,9 @@ import LofiVideo from "../LofiVideo";
 import { Theme } from "../../pages/PomodoroApp/protocol";
 import PomodoroDetails from "../PomodoroDetails";
 import { secondsToTime } from "../../utils/secondsToTime";
-import { toast } from "react-toastify";
 
 const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
+  user,
   setTheme,
   totalPomodoroCompleted,
   totalPomodoroTime,
@@ -32,11 +32,13 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   const params = useParams();
 
   useEffect(() => {
-    getPomodoro();
+    if (user) getPomodoro();
   }, []);
 
   async function getPomodoro() {
     const { id } = params;
+
+    if (!id) return changeMode("Working", workingTheme, 1500, false);
 
     try {
       const response = await api.get(`/pomodoros/${id}`);
@@ -60,14 +62,17 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   }, [timeBlocks]);
 
   useEffect(() => {
-    if (!pomodoro) return;
-
     if (mainTime === 0) {
       if (modePomodoro === "Working") {
-        setTimeBlocks(timeBlocks + 1);
-        setTotalPomodoroCompleted(totalPomodoroCompleted + 1);
-        setTotalPomodoroTime(totalPomodoroTime + pomodoro.timeWorking);
-        shortResting(true);
+        if (!pomodoro) {
+          setTimeBlocks(timeBlocks + 1);
+          shortResting(true);
+        } else {
+          setTimeBlocks(timeBlocks + 1);
+          setTotalPomodoroCompleted(totalPomodoroCompleted + 1);
+          setTotalPomodoroTime(totalPomodoroTime + pomodoro.timeWorking);
+          shortResting(true);
+        }
       } else {
         pomodoroWorking(true);
       }
@@ -84,13 +89,13 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   );
 
   function pomodoroWorking(autoPlay: boolean) {
-    if (!pomodoro) return;
+    if (!pomodoro) return changeMode("Working", workingTheme, 1500, autoPlay);
 
     changeMode("Working", workingTheme, pomodoro.timeWorking, autoPlay);
   }
 
   function shortResting(autoPlay: boolean) {
-    if (!pomodoro) return;
+    if (!pomodoro) return changeMode("Resting", shortRestingTheme, 3, autoPlay);
 
     changeMode(
       "Resting",

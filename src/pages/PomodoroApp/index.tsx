@@ -8,11 +8,14 @@ import { workingTheme } from "../../theme";
 import { Theme } from "./protocol";
 import { useDispatch } from "react-redux";
 import { updatePomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/updateActions";
+import { useSelector } from "react-redux";
+import { State } from "../../store/protocol";
 
 const PomodoroApp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
+  const { user } = useSelector((state: State) => state.UserReducer);
 
   const [theme, setTheme] = useState<Theme>(workingTheme);
   const [totalPomodoroCompleted, setTotalPomodoroCompleted] = useState(0);
@@ -32,15 +35,22 @@ const PomodoroApp = () => {
     navigate("/");
   }
 
+  function goHomeNotUser() {
+    navigate("/");
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <PomodoroPage>
         <Header>
           <Logo justify_content="left" />
 
-          <button onClick={goHome}>Back to panel</button>
+          <button onClick={user ? goHome : goHomeNotUser}>
+            {user ? "Back to panel" : "Back to home"}
+          </button>
         </Header>
         <PomodoroTimer
+          user={user}
           setTheme={setTheme}
           totalPomodoroCompleted={totalPomodoroCompleted}
           totalPomodoroTime={totalPomodoroTime}

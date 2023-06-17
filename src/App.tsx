@@ -20,6 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/pomodoro" element={<PomodoroApp />} />
             <Route path="/pomodoro/:id" element={<PomodoroApp />} />
           </Routes>
         </BrowserRouter>
