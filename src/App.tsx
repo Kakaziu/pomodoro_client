@@ -6,25 +6,28 @@ import GlobalStyles from "./GlobalStyles";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import store from "./store";
+import { persistor, store } from "./store";
 import PomodoroApp from "./pages/PomodoroApp";
+import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
-        <GlobalStyles />
-        <ToastContainer autoClose={3000} />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/pomodoro" element={<PomodoroApp />} />
-            <Route path="/pomodoro/:id" element={<PomodoroApp />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <PersistGate loading={null} persistor={persistor}>
+        <div className="App">
+          <GlobalStyles />
+          <ToastContainer autoClose={3000} />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/pomodoro" element={<PomodoroApp />} />
+              <Route path="/pomodoro/:id" element={<PomodoroApp />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </PersistGate>
     </Provider>
   );
 }
