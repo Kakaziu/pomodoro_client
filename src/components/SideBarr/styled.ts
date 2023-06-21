@@ -9,6 +9,11 @@ export const Aside = styled.aside`
   z-index: 9999;
   background-color: white;
 
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
   ul {
     margin-top: 30px;
     list-style: none;
