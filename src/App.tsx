@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import { persistor, store } from "./store";
 import PomodoroApp from "./pages/PomodoroApp";
 import { PersistGate } from "redux-persist/integration/react";
+import Historic from "./pages/Historic";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/historic" element={<Historic />} />
               <Route path="/pomodoro" element={<PomodoroApp />} />
               <Route path="/pomodoro/:id" element={<PomodoroApp />} />
             </Routes>

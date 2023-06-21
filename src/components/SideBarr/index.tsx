@@ -14,7 +14,7 @@ const SideBarr: FunctionComponent = () => {
   return (
     <Aside>
       <Container>
-        <Logo />
+        <Logo justify_content="center" />
         <div>
           <h3>Navigation</h3>
           <ul>

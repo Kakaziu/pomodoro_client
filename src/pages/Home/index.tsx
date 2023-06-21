@@ -8,14 +8,12 @@ import api from "../../services/api";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
       api.defaults.headers.common["authorization"] = token;
-      setLoading(false);
     }
   }, []);
 
