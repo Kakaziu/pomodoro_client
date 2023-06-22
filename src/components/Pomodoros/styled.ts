@@ -115,3 +115,27 @@ export const LoadingTag = styled.h2`
   width: 150px;
   height: 40px;
 `;
+
+export const SkeletonPomodoro = styled.div`
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0.5);
+  width: 455px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: rgba(59, 59, 59, 0.5);
+
+  button {
+    background-color: transparent;
+    border: none;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+`;
