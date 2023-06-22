@@ -1,21 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Header from "../../components/Header";
 import SideBarr from "../../components/SideBarr";
 import HomeInfos from "../../components/HomeInfos";
 import Modal from "../../components/Modal";
 import ModalForm from "../../components/ModalForm";
-import api from "../../services/api";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      api.defaults.headers.common["authorization"] = token;
-    }
-  }, []);
 
   return (
     <section id="home">

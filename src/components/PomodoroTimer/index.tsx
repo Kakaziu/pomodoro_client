@@ -28,14 +28,18 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   const [modePomodoro, setModePomodoro] = useState<ModePomodoro>("Working");
   const [isPlaying, setIsPlaying] = useState(false);
   const [player, setPlayer] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const params = useParams();
 
   useEffect(() => {
-    if (user) getPomodoro();
+    if (user) {
+      getPomodoro();
+    }
   }, []);
 
   async function getPomodoro() {
+    setLoading(true);
     const { id } = params;
 
     if (!id) return changeMode("Working", workingTheme, 1500, false);
@@ -50,6 +54,7 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
         setMainTime(response.data.timeWorking);
         setTotalPomodoroCompleted(response.data.totalPomodoroCompleted);
         setTotalPomodoroTime(response.data.totalTimePomodoro);
+        setLoading(false);
       }
     } catch (e) {
       return null;
@@ -134,7 +139,7 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
         <button onClick={() => pomodoroWorking(false)}>Pomodoro</button>
         <button onClick={() => shortResting(false)}>Short resting</button>
       </div>
-      <Timer mainTime={mainTime} />
+      <Timer mainTime={mainTime} loading={loading} />
       <ActionButton
         onClick={() => {
           setIsPlaying(!isPlaying);

@@ -10,8 +10,18 @@ import { persistor, store } from "./store";
 import PomodoroApp from "./pages/PomodoroApp";
 import { PersistGate } from "redux-persist/integration/react";
 import Historic from "./pages/Historic";
+import { useEffect } from "react";
+import api from "./services/api";
 
 function App() {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      api.defaults.headers.common["authorization"] = token;
+    }
+  }, []);
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
