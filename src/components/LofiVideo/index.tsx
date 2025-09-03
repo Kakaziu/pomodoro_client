@@ -9,7 +9,7 @@ const LofiVideo: FunctionComponent<IVideo> = ({ player }) => {
         width="400px"
         height="250px"
         allow="autoplay"
-        src={`https://www.youtube.com/watch?v=n61ULEU7CO0&list=RDn61ULEU7CO0&start_radio=1&autoplay=1&mute=${player ? 0 : 1}`}
+        src={`https://www.youtube.com/embed/iicfmXFALM8?si=2IrfXyLTQWZOjaVg&autoplay=${player ? "1" : "0"}&loop=1&playlist=iicfmXFALM8`}
       />
     </LofiContainer>
   );
