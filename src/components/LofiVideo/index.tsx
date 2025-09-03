@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
-import { LofiContainer } from "./styled";
 import { IVideo } from "./protocol";
+import { LofiContainer } from "./styled";
 
 const LofiVideo: FunctionComponent<IVideo> = ({ player }) => {
   return (
@@ -9,7 +9,7 @@ const LofiVideo: FunctionComponent<IVideo> = ({ player }) => {
         width="400px"
         height="250px"
         allow="autoplay"
-        src={`https://www.youtube.com/embed/U-q_-1Hg_rg?autoplay=${player}`}
+        src={`https://www.youtube.com/watch?v=n61ULEU7CO0&list=RDn61ULEU7CO0&start_radio=1&autoplay=1&mute=${player ? 0 : 1}`}
       />
     </LofiContainer>
   );
