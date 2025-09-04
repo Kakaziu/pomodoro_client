@@ -1,8 +1,5 @@
-import { StateCamps } from "../components/AccountForms/protocol";
-
-export default function validEmptyCamps(
-  setFunc: React.Dispatch<React.SetStateAction<StateCamps>>,
-  camp: StateCamps
+export default function isEmpty(
+  camp: string
 ) {
-  if (!camp) return setFunc({ value: "", error: `* Campo vazio.` });
+  if (!camp) return true;
 }

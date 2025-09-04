@@ -1,15 +1,15 @@
 import { FormEvent, FunctionComponent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { AiFillLock, AiFillMail } from "react-icons/ai";
+import { RiUser2Fill, RiUserFill } from "react-icons/ri";
 import ReactLoading from "react-loading";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { RiUserFill, RiUser2Fill } from "react-icons/ri";
-import { AiFillMail, AiFillLock } from "react-icons/ai";
-import { Button } from "../../Button/styled";
 import api from "../../../services/api";
-import { RegisterParams, StateCamps } from "../protocol";
-import { FormTag, Camp } from "../styled";
-import validEmptyCamps from "../../../utils/validEmptyCamps";
 import validEmail from "../../../utils/validEmail";
+import isEmpty from "../../../utils/validEmptyCamps";
+import { Button } from "../../Button/styled";
+import { RegisterParams, StateCamps } from "../protocol";
+import { Camp, FormTag } from "../styled";
 
 const FormRegister: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -32,11 +32,10 @@ const FormRegister: FunctionComponent = () => {
   async function handleSubmitRegister(e: FormEvent): Promise<void> {
     e.preventDefault();
 
-    validEmptyCamps(setFirstName, firstName);
-    validEmptyCamps(setLastName, lastName);
-    validEmptyCamps(setEmail, email);
-    validEmptyCamps(setPassword, password);
-
+    if (isEmpty(firstName.value)) return setFirstName({ value: "", error: "* Campo vazio." });
+    if (isEmpty(lastName.value)) return setLastName({ value: "", error: "* Campo vazio." });
+    if (isEmpty(email.value)) return setEmail({ value: "", error: "* Campo vazio." });
+    if (isEmpty(password.value)) return setPassword({ value: "", error: "* Campo vazio." });
     if (!validEmail(email.value))
       return setEmail({ value: "", error: "E-mail inválido." });
 
@@ -56,6 +55,7 @@ const FormRegister: FunctionComponent = () => {
           navigate("/login");
         }
       } catch (e: any) {
+        setLoading(false);
         toast.error(e.response.data.message);
       }
     }

@@ -1,12 +1,11 @@
-import { useDispatch } from "react-redux";
 import { FormEvent, FunctionComponent, useEffect, useState } from "react";
-import { Camp, Camps, Form, TimeCamp, TimeCamps } from "./styled";
-import { createPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/createActions";
-import { IModalForm } from "./protocol";
-import { useSelector } from "react-redux";
-import { State } from "../../store/protocol";
-import { updatePomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/updateActions";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { createPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/createActions";
+import { updatePomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/updateActions";
+import { State } from "../../store/protocol";
+import { IModalForm } from "./protocol";
+import { Camp, Camps, Form, TimeCamp, TimeCamps } from "./styled";
 
 const ModalForm: FunctionComponent<IModalForm> = ({
   showModal,
@@ -35,6 +34,11 @@ const ModalForm: FunctionComponent<IModalForm> = ({
 
   function createPomodoro(e: FormEvent) {
     e.preventDefault();
+
+    if (!task) { toast.error("Task is required."); return; }
+    if (pomodoroTime < 10) { toast.error("Pomodoro time must be at least 10 minutes."); return; }
+    if (pomodoroShortResting < 1) { toast.error("Short resting must be at least 1 minute."); return; }
+    if (pomodoroLongResting < 5) { toast.error("Long resting must be at least 5 minutes."); return; }
 
     const pomodoroData = {
       title: task,

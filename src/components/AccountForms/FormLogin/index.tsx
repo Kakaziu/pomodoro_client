@@ -1,16 +1,15 @@
 import { FormEvent, FunctionComponent, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { AiFillLock, AiFillMail } from "react-icons/ai";
 import ReactLoading from "react-loading";
-import { useSelector } from "react-redux";
-import { AiFillMail, AiFillLock } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { loginRequest } from "../../../store/modules/user/userActions/loginAction";
 import { State } from "../../../store/protocol";
-import { Button } from "../../Button/styled";
-import { FormTag, Camp } from "../styled";
-import { LoginParams, StateCamps } from "../protocol";
-import validEmptyCamps from "../../../utils/validEmptyCamps";
 import validEmail from "../../../utils/validEmail";
+import isEmpty from "../../../utils/validEmptyCamps";
+import { Button } from "../../Button/styled";
+import { LoginParams, StateCamps } from "../protocol";
+import { Camp, FormTag } from "../styled";
 
 const FormLogin: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -30,9 +29,8 @@ const FormLogin: FunctionComponent = () => {
   async function handleSubmitLogin(e: FormEvent): Promise<void> {
     e.preventDefault();
 
-    validEmptyCamps(setEmail, email);
-    validEmptyCamps(setPassword, password);
-
+    if (isEmpty(email.value)) return setEmail({ value: "", error: "* Campo vazio." });
+    if (isEmpty(password.value)) return setPassword({ value: "", error: "* Campo vazio." });
     if (!validEmail(email.value))
       return setEmail({ value: "", error: "E-mail inválido." });
 
