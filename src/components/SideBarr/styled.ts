@@ -21,6 +21,10 @@ export const Aside = styled.aside`
     padding: 0;
     width: 80%;
   }
+
+  @media (max-width: 750px) {
+    display: none;
+  }
 `;
 
 export const Container = styled.div`

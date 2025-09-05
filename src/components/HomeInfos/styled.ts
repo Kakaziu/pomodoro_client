@@ -4,6 +4,10 @@ import { IHomeInfosTag } from "./protocol";
 export const HomeInfosTag = styled.div<IHomeInfosTag>`
   float: right;
   width: ${(props) => (props.user ? "75%" : "100%")};
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 export const TitlePag = styled.div`
