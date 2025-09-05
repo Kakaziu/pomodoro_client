@@ -1,16 +1,16 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { ActionButton, PomodoroTimerTag } from "./styled";
-import { IPomodoroTime, ModePomodoro } from "./protocol";
-import { workingTheme, shortRestingTheme, longRestingTheme } from "../../theme";
-import Timer from "../Timer";
 import { useParams } from "react-router-dom";
+import { useInterval } from "usehooks-ts";
+import { Theme } from "../../pages/PomodoroApp/protocol";
 import api from "../../services/api";
 import { Pomodoro } from "../../store/modules/pomodoro/protocol";
-import { useInterval } from "usehooks-ts";
-import LofiVideo from "../LofiVideo";
-import { Theme } from "../../pages/PomodoroApp/protocol";
-import PomodoroDetails from "../PomodoroDetails";
+import { longRestingTheme, shortRestingTheme, workingTheme } from "../../theme";
 import { secondsToTime } from "../../utils/secondsToTime";
+import LofiVideo from "../LofiVideo";
+import PomodoroDetails from "../PomodoroDetails";
+import Timer from "../Timer";
+import { IPomodoroTime, ModePomodoro } from "./protocol";
+import { ActionButton, PomodoroTimerTag } from "./styled";
 
 const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   user,
@@ -88,7 +88,10 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
 
   useInterval(
     () => {
-      if (mainTime) setMainTime(mainTime - 1);
+      if (mainTime) {
+        document.title = `${secondsToTime(mainTime)} - Pomodoro App`;
+        setMainTime(mainTime - 1)
+      };
       if (modePomodoro === "Working")
         setInstanceTotalTime(instanceTotalTime + 1);
     },
@@ -102,7 +105,7 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   }
 
   function shortResting(autoPlay: boolean) {
-    if (!pomodoro) return changeMode("Resting", shortRestingTheme, 3, autoPlay);
+    if (!pomodoro) return changeMode("Resting", shortRestingTheme, 300, autoPlay);
 
     changeMode(
       "Resting",
@@ -113,7 +116,7 @@ const PomodoroTimer: FunctionComponent<IPomodoroTime> = ({
   }
 
   function longResting(autoplay: boolean) {
-    if (!pomodoro) return;
+    if (!pomodoro) return changeMode("Resting", longRestingTheme, 900, autoplay);
 
     changeMode("Resting", longRestingTheme, pomodoro.timeLongResting, autoplay);
   }
