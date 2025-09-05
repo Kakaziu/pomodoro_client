@@ -29,4 +29,12 @@ export const Button = styled.button<IButton<IBorder>>`
     position: absolute;
     right: 30px;
   }
+
+  ${(props) => props.haveMobile && `
+    @media (max-width: 560px) {
+      font-size: 14px;
+      width: 100%;
+      padding: 8px 0px;
+    }
+  `}
 `;

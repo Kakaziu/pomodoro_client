@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
-import { HomeInfosTag, TitlePag } from "./styled";
 import { useSelector } from "react-redux";
 import { State } from "../../store/protocol";
 import HomeContent from "../HomeContent";
 import { IHomeInfos } from "./protocol";
+import { HomeInfosTag, TitlePag } from "./styled";
 
 const HomeInfos: FunctionComponent<IHomeInfos> = ({ setShowModal }) => {
   const { user } = useSelector((state: State) => state.UserReducer);

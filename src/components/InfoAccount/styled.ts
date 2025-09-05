@@ -21,4 +21,8 @@ export const InfoAccountTag = styled.div`
     text-align: center;
     font-weight: lighter;
   }
+
+  @media (max-width: 850px) {
+    display: none;
+  }
 `;

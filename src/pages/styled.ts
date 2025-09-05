@@ -7,4 +7,8 @@ export const AccountTag = styled.div`
   width: 900px;
   border-radius: 10px;
   height: 450px;
+
+  @media (max-width: 950px) {
+    width: 90%;
+  }
 `;

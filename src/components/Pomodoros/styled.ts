@@ -17,6 +17,10 @@ export const PomodorosTag = styled.div`
     width: 5px;
     border-radius: 10px;
   }
+
+  /* @media (max-width: 1000px){
+    justify-content: center;
+  } */
 `;
 
 export const Pomodoro = styled.div`
@@ -38,14 +42,16 @@ export const Pomodoro = styled.div`
     color: black;
     position: relative;
     z-index: 9997;
+
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
   }
 
   h3 {
     font-size: 28px;
     display: flex;
-    justify-content: space-between;
-    width: 95%;
-    margin: auto;
+    width: 100%;
   }
 
   span {
@@ -57,6 +63,10 @@ export const Pomodoro = styled.div`
 
   &:hover {
     outline: 2px solid #121331;
+  }
+
+  @media (max-width: 1000px){
+    width: 100%;
   }
 `;
 
@@ -137,5 +147,9 @@ export const SkeletonPomodoro = styled.div`
     &:hover {
       transform: scale(1.2);
     }
+  }
+
+  @media (max-width: 1000px){
+    width: 100%;
   }
 `;

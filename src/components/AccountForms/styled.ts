@@ -13,6 +13,10 @@ export const FormTag = styled.form`
     color: #121331;
     margin-bottom: 35px;
   }
+
+  @media (max-width: 850px) {
+    width: 90%
+  }
 `;
 
 export const Camp = styled.div`
@@ -25,6 +29,10 @@ export const Camp = styled.div`
     position: absolute;
     top: 9px;
     left: 90px;
+
+    @media (max-width: 560px) {
+      left: 10px;
+    } 
   }
 
   p {
@@ -50,6 +58,11 @@ export const Camp = styled.div`
 
     &::placeholder {
       font-weight: bold;
+    }
+
+    @media (max-width: 560px) {
+      width: 100%;
+      font-size: 14px;
     }
   }
 `;

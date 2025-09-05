@@ -143,6 +143,7 @@ const FormRegister: FunctionComponent = () => {
         color="white"
         hoverBackgroundColor="rgba(18, 19, 49, 0.9)"
         hoverColor="white"
+        haveMobile={true}
       >
         SIGN UP
         {loading ? (

@@ -12,4 +12,5 @@ export interface IButton<T> {
   color: string;
   hoverBackgroundColor: string;
   hoverColor: string;
+  haveMobile?: boolean;
 }

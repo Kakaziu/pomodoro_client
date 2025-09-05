@@ -1,8 +1,17 @@
 import { FunctionComponent, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ReactLoading from "react-loading";
 import { AiFillDelete, AiFillEdit, AiFillPlusCircle } from "react-icons/ai";
+import ReactLoading from "react-loading";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { deletePomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/deleteActions";
+import { readPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/readActions";
+import { showPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/showActions";
 import { Pomodoro as IPomodoro } from "../../store/modules/pomodoro/protocol";
+import { State } from "../../store/protocol";
+import { secondsToMinutes } from "../../utils/secondsToMinutes";
+import { secondsToTime } from "../../utils/secondsToTime";
+import { IPomodorosTag } from "./protocol";
 import {
   ActionBtns,
   LoadingTag,
@@ -11,15 +20,6 @@ import {
   PomodorosTag,
   SkeletonPomodoro,
 } from "./styled";
-import { readPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/readActions";
-import { deletePomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/deleteActions";
-import { State } from "../../store/protocol";
-import { IPomodorosTag } from "./protocol";
-import { showPomodoroRequest } from "../../store/modules/pomodoro/pomodoroActions/showActions";
-import { secondsToMinutes } from "../../utils/secondsToMinutes";
-import { secondsToTime } from "../../utils/secondsToTime";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const Pomodoros: FunctionComponent<IPomodorosTag> = ({ setShowModal }) => {
   const dispatch = useDispatch();
