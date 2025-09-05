@@ -24,5 +24,10 @@ export const ContentNoUser = styled.div`
     &:hover {
       background-color: rgba(18, 19, 49, 0.9);
     }
+
+    @media(max-width: 850px) {
+      width: 60%;
+      font-size: 16px;
+    }
   }
 `;
