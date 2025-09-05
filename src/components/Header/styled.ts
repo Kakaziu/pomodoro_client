@@ -48,6 +48,11 @@ export const ContainerNoUser = styled.div`
     &:hover {
       background-color: rgba(18, 19, 49, 0.9);
     }
+
+    @media (max-width: 850px) {
+      width: 30%;
+      font-size: 14px;
+    }
   }
 `;
 
